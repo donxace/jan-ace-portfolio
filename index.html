@@ -980,6 +980,22 @@
           </div>
         </article>
 
+        <article class="card card--media" data-project="pupdonx" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="card-media"><img src="pup-donx-wan.png" alt="PUP campuses on Donx case study header with the design sheet and headline figures: 26 campuses, 138 devices, 50 encrypted GRE tunnels, 72 device configurations" loading="lazy"></div>
+          <div class="card-body">
+            <h3>PUP&ndash;Donx Campus WAN</h3>
+            <p>Enterprise WAN design connecting all 26 PUP campuses through Donx, a fictional regional ISP: dual-homed eBGP edge, GRE over IPsec overlay with two hubs, one OSPF area per campus, and a firewalled DMZ &mdash; 138 devices and 72 ready-to-paste configurations built in Cisco Packet Tracer.</p>
+            <div class="tagrow">
+              <span class="tag">BGP</span>
+              <span class="tag">OSPF</span>
+              <span class="tag">GRE/IPsec</span>
+              <span class="tag">Cisco ASA</span>
+              <span class="tag">Packet Tracer</span>
+            </div>
+            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
+          </div>
+        </article>
+
         <article class="card">
           <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></div>
           <h3>Multi-Campus Network Automation</h3>
@@ -1283,6 +1299,25 @@
         { src: "pnp-gallery-pcinfo.png", alt: "PC Information System risk distribution and component health", caption: "PC Information System" }
       ],
       tags: ["React", "NestJS", "TypeORM/MySQL", "ESP32", "QR Codes"]
+    },
+    pupdonx: {
+      title: "PUP–Donx Campus WAN",
+      image: "pup-donx-wan.png",
+      alt: "PUP campuses on Donx case study header with the design sheet and headline figures",
+      description: "Network architecture case study: an enterprise WAN connecting all 26 campuses of the Polytechnic University of the Philippines, from Sta. Mesa to Sablayan, through Donx Networks, a fictional regional ISP. Every device is fully configured and buildable in Cisco Packet Tracer 8.2+.",
+      points: [
+        "Routing — PUP (AS 64510) and Donx (AS 64500) each run their own OSPF process and meet only at eBGP. Two PUP edges peer at separate POPs and announce a split /25 under a covering /24, so return traffic lands on the edge holding the PAT translation and either edge covers for the other on failure.",
+        "Overlay — 50 GRE over IPsec tunnels from every branch to two hubs at Sta. Mesa, with OSPF costs (1000 primary / 2000 backup) keeping traffic symmetric. PUP's private routes exist only inside the encrypted overlay.",
+        "Addressing — 10.<site>.<role>.0/24: the second octet is the campus and the third is the user role, the same everywhere, so a single wildcard ACL line enforces a role policy across all 26 campuses.",
+        "Security — nine layers from the Internet inward: BCP 38 ingress filtering, edge ACLs, an ASA-firewalled DMZ, role-based ACLs, and Layer 2 guards, with the Student Information System kept off the Internet for Data Privacy Act compliance.",
+        "Build — 138 devices, 154 cables, 72 configurations (15,205 lines), an interactive map of every campus with traffic-flow and failover playback, a cabling matrix, and control-plane plus end-to-end verification tests."
+      ],
+      gallery: [
+        { src: "pup-donx-wan.png", alt: "Case study header with the design sheet and headline figures", caption: "Design summary" },
+        { src: "pup-donx-wan-map.png", alt: "Map of Luzon and Mindoro showing every PUP campus wired to its Donx POP, with Metro Manila and the Sta. Mesa main campus as insets and a highlighted traffic flow", caption: "Topology map" }
+      ],
+      link: { url: "https://claude.ai/artifact/E4zXRDB5nub4ZhPahbCPTp", label: "View full case study" },
+      tags: ["BGP", "OSPF", "GRE/IPsec", "Cisco ASA", "Packet Tracer"]
     },
     ccna: {
       title: "CCNA — Cisco Certified Network Associate",
