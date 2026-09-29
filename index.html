@@ -1,0 +1,1534 @@
+<meta charset="UTF-8">
+<title>Jan Ace Lazo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#e7ebf1;
+    --bg-raised:#e7ebf1;
+    --bg-raised-2:#dde2ea;
+    --line:rgba(163,177,198,0.28);
+    --line-strong:rgba(163,177,198,0.4);
+    --ink:#2c3444;
+    --ink-dim:#5c6579;
+    --ink-faint:#8891a3;
+    --accent:#2f5fff;
+    --accent-2:#0d8f79;
+    --accent-ink:#ffffff;
+    --accent-dim:rgba(47,95,255,0.1);
+    --nav-bg:rgba(231,235,241,0.82);
+    --neu-dark:rgba(163,177,198,0.55);
+    --neu-light:rgba(255,255,255,0.9);
+    --neu-out:6px 6px 14px var(--neu-dark),-6px -6px 14px var(--neu-light);
+    --neu-out-sm:4px 4px 8px var(--neu-dark),-4px -4px 8px var(--neu-light);
+    --neu-out-lg:14px 14px 30px var(--neu-dark),-14px -14px 30px var(--neu-light);
+    --neu-in:inset 4px 4px 8px var(--neu-dark),inset -4px -4px 8px var(--neu-light);
+    --neu-in-sm:inset 3px 3px 6px var(--neu-dark),inset -3px -3px 6px var(--neu-light);
+    --neu-out-hover:10px 10px 22px var(--neu-dark),-10px -10px 22px var(--neu-light);
+    --ease-smooth:cubic-bezier(.22,.85,.32,1);
+    --ease-spring:cubic-bezier(.34,1.56,.64,1);
+    --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --display:'Space Grotesk',var(--sans);
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+    --radius:18px;
+    color-scheme:light;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+  }
+
+  ::selection{background:var(--accent);color:#fff;}
+
+  a{color:inherit;}
+  button{font:inherit;color:inherit;}
+
+  h1,h2,h3{
+    font-family:var(--display);
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+  }
+
+  p{margin:0;}
+
+  .mono{font-family:var(--mono);}
+
+  .wrap{max-width:1320px;margin-inline:auto;padding-inline:40px;}
+
+  @media (max-width:960px){.wrap{padding-inline:28px;}}
+  @media (max-width:640px){.wrap{padding-inline:18px;}}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.04em;
+    color:var(--accent-2);
+  }
+  .eyebrow::before{
+    content:"";
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--accent-2);
+    box-shadow:0 0 8px var(--accent-2);
+  }
+
+  /* ---------- nav ---------- */
+
+  .topnav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--nav-bg);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 6px 18px -10px rgba(163,177,198,0.6);
+  }
+
+  .topnav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-block:14px;
+  }
+
+  .brand{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:16px;
+    text-decoration:none;
+    letter-spacing:-0.01em;
+  }
+
+  .navlinks{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .navlinks a{
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color .2s var(--ease-smooth),box-shadow .25s var(--ease-smooth),transform .25s var(--ease-smooth);
+  }
+  .navlinks a:hover{color:var(--ink);box-shadow:var(--neu-out-sm);transform:translateY(-1px);}
+  .navlinks a:active{transform:translateY(0);box-shadow:var(--neu-in-sm);}
+  .navlinks a.current{color:var(--accent);box-shadow:var(--neu-in-sm);transform:none;}
+
+  .navlinks a.cta-link{
+    color:var(--accent-ink);
+    background:var(--accent);
+    font-weight:600;
+    box-shadow:4px 4px 10px rgba(47,95,255,0.35),-3px -3px 8px rgba(255,255,255,0.6);
+  }
+  .navlinks a.cta-link:hover{background:var(--accent-2);color:var(--accent-ink);box-shadow:var(--neu-out-sm);transform:translateY(-1px);}
+
+  .menu-btn{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:36px;height:36px;
+    border-radius:10px;
+    border:none;
+    background:var(--bg);
+    box-shadow:var(--neu-out-sm);
+    cursor:pointer;
+    transition:box-shadow .2s var(--ease-smooth),transform .2s var(--ease-smooth);
+  }
+  .menu-btn:hover{transform:translateY(-1px);box-shadow:var(--neu-out);}
+  .menu-btn:active{transform:translateY(0);box-shadow:var(--neu-in-sm);}
+  .menu-btn svg{width:18px;height:18px;transition:transform .3s var(--ease-spring);}
+  .menu-btn[aria-expanded="true"] svg{transform:rotate(90deg);}
+
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+
+  @media (max-width:760px){
+    .navlinks{
+      position:absolute;
+      top:100%;left:0;right:0;
+      flex-direction:column;
+      align-items:stretch;
+      gap:2px;
+      padding:10px 24px 16px;
+      background:var(--bg);
+      box-shadow:0 6px 18px -10px rgba(163,177,198,0.6);
+    }
+    .navlinks[hidden]{display:none;}
+    .navlinks a{padding:10px 12px;}
+    .navlinks a.cta-link{margin-top:6px;text-align:center;}
+    .menu-btn{display:flex;}
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    padding-block:72px 64px;
+    background:
+      radial-gradient(circle at 82% 12%,rgba(91,140,255,0.14),transparent 48%),
+      radial-gradient(circle at 8% 92%,rgba(126,225,208,0.09),transparent 45%);
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    align-items:center;
+    gap:48px;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:36px;}
+    .hero-photo-col{order:-1;}
+  }
+
+  .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:18px;}
+
+  .hero-copy h1{
+    font-size:clamp(34px,4.2vw,64px);
+    line-height:1.06;
+  }
+  .hero-copy h1 span{color:var(--accent-2);}
+
+  .hero-role{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(16px,2.2vw,19px);
+    color:var(--ink-dim);
+  }
+
+  .hero-desc{
+    max-width:52ch;
+    color:var(--ink-dim);
+    font-size:15.5px;
+  }
+
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:4px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:14px;
+    text-decoration:none;
+    cursor:pointer;
+    border:none;
+    position:relative;
+    overflow:hidden;
+    transition:transform .3s var(--ease-smooth),box-shadow .3s var(--ease-smooth),background .25s var(--ease-smooth);
+  }
+  .btn:hover{transform:translateY(-3px);}
+  .btn:active{transform:translateY(-1px) scale(.98);transition-duration:.1s;}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  .btn-primary{
+    background:var(--accent);
+    color:var(--accent-ink);
+    box-shadow:6px 6px 14px rgba(47,95,255,0.35),-6px -6px 14px rgba(255,255,255,0.7);
+  }
+  .btn-primary::after{
+    content:"";
+    position:absolute;top:0;left:-75%;
+    width:50%;height:100%;
+    background:linear-gradient(115deg,transparent,rgba(255,255,255,0.55),transparent);
+    transform:skewX(-20deg);
+    transition:left .65s var(--ease-smooth);
+  }
+  .btn-primary:hover::after{left:130%;}
+  .btn-primary:hover{background:var(--accent-2);box-shadow:8px 8px 20px rgba(13,143,121,0.35),-8px -8px 20px rgba(255,255,255,0.75);}
+  .btn-primary:active{box-shadow:inset 4px 4px 8px rgba(13,40,140,0.4),inset -4px -4px 8px rgba(120,150,255,0.45);}
+
+  .btn-ghost{
+    background:var(--bg);
+    color:var(--ink);
+    box-shadow:var(--neu-out);
+  }
+  .btn-ghost:hover{color:var(--accent-2);box-shadow:var(--neu-out-hover);}
+  .btn-ghost:active{box-shadow:var(--neu-in);}
+
+  .hero-stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-top:14px;
+    padding:18px 22px;
+    border-radius:var(--radius);
+    box-shadow:var(--neu-in-sm);
+    width:100%;
+  }
+  .hero-stat b{
+    display:block;
+    font-family:var(--display);
+    font-size:22px;
+    color:var(--ink);
+  }
+  .hero-stat span{
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+
+  /* photo frame */
+
+  .hero-photo-col{position:relative;display:flex;justify-content:center;}
+
+  .hero-photo-frame{
+    position:relative;
+    width:min(400px,100%);
+    aspect-ratio:7/10;
+    border-radius:28px;
+    overflow:hidden;
+    background:var(--bg);
+    box-shadow:var(--neu-out-lg);
+    padding:10px;
+    transition:transform .45s var(--ease-smooth),box-shadow .45s var(--ease-smooth);
+  }
+  .hero-photo-frame:hover{transform:translateY(-6px) scale(1.015);}
+  .hero-photo-frame:hover img{transform:scale(1.04);}
+  .hero-photo-frame::before{
+    content:"";
+    position:absolute;inset:10px;
+    border-radius:20px;
+    background:
+      radial-gradient(circle at 50% 20%,rgba(91,140,255,0.3),transparent 55%),
+      radial-gradient(circle at 70% 85%,rgba(126,225,208,0.2),transparent 50%),
+      var(--bg-raised-2);
+    box-shadow:var(--neu-in);
+    z-index:0;
+  }
+
+  .hero-photo-frame img{
+    position:absolute;
+    inset:10px;
+    width:calc(100% - 20px);
+    height:calc(100% - 20px);
+    border-radius:20px;
+    object-fit:cover;
+    object-position:center top;
+    z-index:1;
+    transition:transform .5s var(--ease-smooth);
+  }
+
+  .hero-photo-badge{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 14px;
+    background:rgba(11,13,18,0.85);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    color:#f3f5f7;
+    z-index:2;
+  }
+  .hero-photo-badge .dot{
+    width:7px;height:7px;flex:none;border-radius:50%;
+    background:#6be675;box-shadow:0 0 8px rgba(107,230,117,0.8);
+  }
+
+  /* ---------- sections ---------- */
+
+  section{padding-block:64px;}
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:28px;
+  }
+  .section-head h2{font-size:clamp(22px,3.4vw,28px);}
+  .section-head .count{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+
+  .prose{max-width:65ch;color:var(--ink-dim);font-size:15px;}
+
+  /* about */
+
+  .notes{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    max-width:68ch;
+  }
+  .notes li{
+    display:flex;
+    gap:14px;
+    list-style:none;
+    color:var(--ink-dim);
+    font-size:15px;
+  }
+  .notes li .n{
+    flex:none;
+    width:26px;height:26px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:9px;
+    background:var(--bg);
+    box-shadow:var(--neu-out-sm);
+    transition:transform .4s var(--ease-spring),color .3s var(--ease-smooth);
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--accent-2);
+  }
+  .notes li:hover .n{transform:scale(1.15) rotate(-8deg);color:var(--accent);}
+
+  /* experience timeline */
+
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+
+  .tl-item{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:24px;
+    padding:24px;
+    border-radius:var(--radius);
+    box-shadow:var(--neu-out-sm);
+    transition:transform .35s var(--ease-smooth),box-shadow .35s var(--ease-smooth);
+  }
+  .tl-item:hover{transform:translateY(-4px);box-shadow:var(--neu-out);}
+  .tl-item:not(:first-child){margin-top:14px;}
+
+  @media (max-width:640px){
+    .tl-item{grid-template-columns:1fr;gap:6px;}
+  }
+
+  .tl-date{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-faint);
+    padding-top:2px;
+  }
+
+  .tl-item h3{font-size:17px;font-weight:600;}
+  .tl-org{
+    font-size:13.5px;
+    color:var(--accent-2);
+    font-weight:500;
+    margin-top:2px;
+  }
+
+  .tl-item ul{
+    margin:12px 0 0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .tl-item li{
+    list-style:none;
+    padding-left:16px;
+    position:relative;
+    color:var(--ink-dim);
+    font-size:14px;
+    max-width:62ch;
+  }
+  .tl-item li::before{
+    content:"";
+    position:absolute;left:0;top:9px;
+    width:6px;height:1.5px;
+    background:var(--ink-faint);
+  }
+  .tl-item li strong{color:var(--ink);font-weight:600;}
+
+  /* project cards */
+
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:16px;
+  }
+
+  .card{
+    border:none;
+    background:var(--bg);
+    border-radius:var(--radius);
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    box-shadow:var(--neu-out);
+    transition:transform .35s var(--ease-smooth),box-shadow .35s var(--ease-smooth);
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--neu-out-hover);
+  }
+
+  .card-icon{
+    width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:10px;
+    background:var(--bg);
+    box-shadow:var(--neu-in-sm);
+    color:var(--accent-2);
+    flex:none;
+    transition:transform .4s var(--ease-spring),color .3s var(--ease-smooth);
+  }
+  .card-icon svg{width:17px;height:17px;}
+  .card:hover .card-icon{transform:scale(1.12) rotate(-8deg);color:var(--accent);}
+
+  .card--media{padding:0;overflow:hidden;cursor:pointer;}
+  .card--media:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .card-media{
+    margin:0;
+    aspect-ratio:16/10;
+    background:var(--bg-raised-2);
+    overflow:hidden;
+  }
+  .card-media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .5s var(--ease-smooth);}
+  .card--media:hover .card-media img{transform:scale(1.06);}
+  .card--media .card-body{padding:22px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .card-more{
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--accent);
+    margin-top:auto;
+    padding-top:2px;
+  }
+  .card-more .arrow{
+    display:inline-block;
+    transition:transform .3s var(--ease-smooth);
+  }
+  .card--media:hover .card-more .arrow{transform:translateX(4px);}
+
+  /* project details modal */
+
+  .project-modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(10,13,20,0.55);
+    backdrop-filter:blur(4px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:100;
+    opacity:0;
+    transition:opacity .25s var(--ease-smooth);
+  }
+  .project-modal-overlay[hidden]{display:none;}
+  .project-modal-overlay.open{opacity:1;}
+
+  .project-modal{
+    position:relative;
+    width:min(680px,100%);
+    max-height:88vh;
+    display:flex;
+    flex-direction:column;
+    background:var(--bg);
+    border:none;
+    border-radius:var(--radius);
+    box-shadow:var(--neu-out-lg),0 40px 80px -24px rgba(0,0,0,0.35);
+    transform:scale(.94) translateY(10px);
+    opacity:0;
+    transition:width .25s var(--ease-smooth),transform .4s var(--ease-spring),opacity .3s var(--ease-smooth);
+  }
+  .project-modal.has-gallery{width:min(860px,100%);}
+  .project-modal-overlay.open .project-modal{transform:scale(1) translateY(0);opacity:1;}
+
+  .pm-header{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:18px 20px;
+    border-radius:var(--radius) var(--radius) 0 0;
+    background:var(--bg);
+    position:relative;
+    z-index:3;
+  }
+  .pm-header h3{font-size:17px;font-weight:700;margin:0;padding-right:12px;}
+
+  .project-modal-close{
+    flex:none;
+    width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:var(--bg-raised-2);
+    box-shadow:var(--neu-out-sm);
+    color:var(--ink-dim);
+    border:none;
+    cursor:pointer;
+    transition:transform .3s var(--ease-smooth),box-shadow .2s var(--ease-smooth),color .2s var(--ease-smooth);
+  }
+  .project-modal-close:hover{color:var(--accent);box-shadow:var(--neu-out);transform:rotate(90deg);}
+  .project-modal-close:active{box-shadow:var(--neu-in-sm);}
+  .project-modal-close svg{width:14px;height:14px;}
+
+  .project-modal-scroll{overflow-y:auto;flex:1;min-height:0;border-radius:0 0 var(--radius) var(--radius);}
+
+  .pm-carousel{position:relative;background:var(--bg-raised-2);overflow:hidden;}
+  .pm-carousel-track{display:flex;transition:transform .45s var(--ease-smooth);}
+  .pm-slide{position:relative;flex:none;width:100%;aspect-ratio:16/10;}
+  .pm-slide img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;}
+  .pm-slide-caption{
+    position:absolute;bottom:12px;left:12px;
+    background:rgba(17,20,30,0.75);
+    color:#fff;font-size:11px;font-weight:600;
+    padding:5px 11px;border-radius:999px;
+    backdrop-filter:blur(4px);
+  }
+
+  .pm-nav{
+    position:absolute;top:50%;
+    transform:translateY(-50%);
+    width:38px;height:38px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(6px);
+    box-shadow:0 4px 14px rgba(31,38,135,0.28);
+    color:var(--ink);border:none;cursor:pointer;
+    transition:transform .25s var(--ease-smooth),background .2s var(--ease-smooth);
+    z-index:2;
+  }
+  .pm-nav:hover{background:#fff;transform:translateY(-50%) scale(1.08);}
+  .pm-nav:active{transform:translateY(-50%) scale(0.95);}
+  .pm-nav svg{width:16px;height:16px;}
+  .pm-nav-prev{left:12px;}
+  .pm-nav-next{right:12px;}
+
+  .pm-counter{
+    position:absolute;top:12px;left:12px;
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    color:var(--ink);background:rgba(255,255,255,0.85);
+    padding:4px 10px;border-radius:999px;
+    backdrop-filter:blur(6px);
+    z-index:2;
+  }
+
+  .pm-dots{
+    position:absolute;bottom:12px;left:0;right:0;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    z-index:2;
+  }
+  .pm-dots button{
+    width:7px;height:7px;border-radius:50%;padding:0;border:none;
+    background:rgba(255,255,255,0.65);
+    box-shadow:0 1px 3px rgba(0,0,0,0.3);
+    cursor:pointer;
+    transition:transform .3s var(--ease-spring),background .2s var(--ease-smooth);
+  }
+  .pm-dots button.active{background:var(--accent);transform:scale(1.35);}
+
+  .pm-carousel.single .pm-nav,
+  .pm-carousel.single .pm-dots,
+  .pm-carousel.single .pm-counter{display:none;}
+
+  .project-modal-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:18px;}
+  .project-modal-body p{color:var(--ink-dim);font-size:14.5px;}
+
+  .pm-features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:10px;
+  }
+  .pm-feature{
+    background:var(--bg-raised-2);
+    border-radius:12px;
+    padding:13px 15px;
+    box-shadow:var(--neu-in-sm);
+  }
+  .pm-feature h4{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 4px;}
+  .pm-feature p{margin:0;font-size:12.5px;color:var(--ink-dim);line-height:1.55;}
+
+  .pm-footer{
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+  .pm-label{
+    display:block;margin-bottom:8px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);
+  }
+
+  .project-modal-link a{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:9px 16px;border-radius:999px;
+    background:var(--bg-raised);box-shadow:var(--neu-out-sm);
+    color:var(--accent);font-weight:600;font-size:13px;
+    transition:box-shadow .25s var(--ease-smooth),transform .25s var(--ease-smooth);
+  }
+  .project-modal-link a:hover{box-shadow:var(--neu-out);transform:translateY(-2px);}
+  .project-modal-link a:active{box-shadow:var(--neu-in-sm);transform:translateY(0);}
+
+  .card h3{font-size:16px;font-weight:600;}
+  .card p{color:var(--ink-dim);font-size:13.5px;}
+
+  .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px;}
+  .tag{
+    font-family:var(--mono);
+    font-size:10.5px;
+    color:var(--ink-dim);
+    background:var(--bg);
+    box-shadow:var(--neu-in-sm);
+    padding:4px 9px;
+    border-radius:7px;
+  }
+
+  /* specifications */
+
+  .specs{display:grid;grid-template-columns:220px 1fr;gap:28px;}
+  @media (max-width:680px){.specs{grid-template-columns:1fr;}}
+
+  .gwa-card{
+    border:none;
+    background:var(--bg);
+    border-radius:var(--radius);
+    box-shadow:var(--neu-out);
+    padding:20px;
+  }
+  .gwa-card .num{
+    font-family:var(--display);
+    font-size:44px;
+    font-weight:700;
+    color:var(--accent-2);
+    line-height:1;
+  }
+  .gwa-card .cap{
+    display:block;
+    margin-top:6px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    color:var(--ink-dim);
+  }
+  .edu-org{margin-top:14px;font-size:13.5px;color:var(--ink-dim);}
+  .edu-org strong{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px;}
+
+  .certs{display:flex;flex-direction:column;gap:2px;}
+  .cert{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:13px 14px;border-radius:10px;
+  }
+  .cert-name{font-weight:600;font-size:14.5px;}
+  .cert-sub{font-family:var(--mono);font-size:11px;color:var(--ink-faint);text-align:right;flex:none;}
+
+  .cert{transition:box-shadow .25s var(--ease-smooth),transform .25s var(--ease-smooth);}
+  .cert[data-project]{cursor:pointer;}
+  .cert[data-project]:hover{box-shadow:var(--neu-out-sm);transform:translateX(2px);}
+  .cert[data-project]:active{box-shadow:var(--neu-in-sm);transform:translateX(0);}
+  .cert[data-project]:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+  .cert-main{display:flex;align-items:center;gap:12px;min-width:0;flex:1 1 200px;}
+
+  @media (max-width:480px){
+    .cert{align-items:flex-start;}
+    .cert-sub{text-align:left;margin-left:46px;max-width:calc(100% - 46px);}
+  }
+
+  /* certificate picture cards — shown immediately, no click needed to view */
+
+  .cert-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .cert-card{
+    border:none;
+    background:var(--bg);
+    border-radius:var(--radius);
+    overflow:hidden;
+    cursor:pointer;
+    display:flex;flex-direction:column;
+    box-shadow:var(--neu-out);
+    transition:transform .35s var(--ease-smooth),box-shadow .35s var(--ease-smooth);
+  }
+  .cert-card:hover{transform:translateY(-5px);box-shadow:var(--neu-out-hover);}
+  .cert-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .cert-card-media{aspect-ratio:4/3;background:var(--bg-raised-2);overflow:hidden;}
+  .cert-card-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s var(--ease-smooth);}
+  .cert-card:hover .cert-card-media img{transform:scale(1.06);}
+  .cert-card-foot{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+  .cert-card-foot .cert-badge,.cert-card-foot .cert-badge-icon{width:28px;height:28px;flex:none;}
+  .cert-card-foot .cert-badge-icon svg{width:14px;height:14px;}
+  .cert-card-text{min-width:0;}
+  .cert-card-text .cert-name{display:block;font-size:13.5px;}
+  .cert-card-text .cert-sub{display:block;text-align:left;font-size:10.5px;margin-top:1px;}
+  .cert-badge{
+    width:34px;height:34px;flex:none;
+    border-radius:9px;
+    object-fit:contain;
+    background:var(--bg);
+    box-shadow:var(--neu-in-sm);
+    padding:3px;
+    transition:transform .4s var(--ease-spring);
+  }
+  .cert-badge-icon{
+    width:34px;height:34px;flex:none;
+    border-radius:9px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--bg);
+    box-shadow:var(--neu-in-sm);
+    color:var(--accent-2);
+    transition:transform .4s var(--ease-spring),color .3s var(--ease-smooth);
+  }
+  .cert-badge-icon svg{width:16px;height:16px;}
+  .cert-card:hover .cert-badge{transform:scale(1.12) rotate(-6deg);}
+  .cert-card:hover .cert-badge-icon{transform:scale(1.12) rotate(-6deg);color:var(--accent);}
+  .cert-text{display:flex;flex-direction:column;gap:2px;min-width:0;}
+
+  /* skills */
+
+  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;}
+  .legend-group .label{
+    display:block;margin-bottom:12px;
+    font-family:var(--mono);font-size:11px;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  .legend-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .legend-tags span{
+    font-size:13px;font-weight:500;color:var(--ink);
+    background:var(--bg);box-shadow:var(--neu-out-sm);
+    padding:7px 13px;border-radius:999px;
+    transition:box-shadow .25s var(--ease-smooth),color .25s var(--ease-smooth),transform .25s var(--ease-smooth);
+  }
+  .legend-tags span:hover{color:var(--accent-2);box-shadow:var(--neu-out);transform:translateY(-2px);}
+  .legend-tags span:active{box-shadow:var(--neu-in-sm);transform:translateY(0);}
+
+  /* footer */
+
+  footer{
+    display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+    gap:14px;padding-block:32px;
+  }
+  footer .end{font-family:var(--mono);font-size:11px;color:var(--ink-faint);}
+  footer .contact{display:flex;gap:10px;flex-wrap:wrap;}
+
+  .copy-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 14px;border-radius:999px;
+    background:var(--bg);border:none;
+    color:var(--ink-dim);font-family:var(--mono);font-size:12px;
+    cursor:pointer;box-shadow:var(--neu-out-sm);
+    transition:box-shadow .25s var(--ease-smooth),color .25s var(--ease-smooth),transform .25s var(--ease-smooth);
+  }
+  .copy-btn:hover{color:var(--ink);box-shadow:var(--neu-out);transform:translateY(-2px);}
+  .copy-btn:active{box-shadow:var(--neu-in-sm);transform:translateY(0);}
+  .copy-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .copy-btn svg{width:12px;height:12px;flex:none;transition:transform .35s var(--ease-spring);}
+  .copy-btn:hover svg{transform:scale(1.15);}
+  .copy-btn.copied{box-shadow:var(--neu-in-sm);color:var(--accent-2);transform:translateY(0);}
+  .copy-btn.copied svg{transform:scale(1.2) rotate(-8deg);}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+
+<nav class="topnav">
+  <div class="wrap topnav-inner">
+    <a href="#top" class="brand">Jan Ace Lazo</a>
+    <div class="navlinks" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#specifications">Specifications</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="cta-link">Contact</a>
+    </div>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 6h14M3 10h14M3 14h14"/>
+      </svg>
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Available for internships</span>
+      <h1>Hi, I&rsquo;m Jan Ace &mdash;<br>building <span>real systems</span>,<br>not just demos.</h1>
+      <p class="hero-role">Computer Engineering Student &middot; PUP</p>
+      <p class="hero-desc">I work across networking, embedded hardware, and software &mdash; and use AI prompt engineering as a working instrument in every one of those, not as a shortcut around understanding them.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>1.48</b><span>GWA</span></div>
+        <div class="hero-stat"><b>8</b><span>Certifications</span></div>
+        <div class="hero-stat"><b>3</b><span>Featured projects</span></div>
+      </div>
+    </div>
+
+    <div class="hero-photo-col">
+      <div class="hero-photo-frame">
+        <img src="portrait-1x1.png" alt="Portrait of Jan Ace Lazo" width="1080" height="1080">
+        <span class="hero-photo-badge"><span class="dot" aria-hidden="true"></span>Open to internships</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head"><h2>About</h2></div>
+      <ol class="notes">
+        <li><span class="n">01</span><span>Third-year Computer Engineering student at Polytechnic University of the Philippines, carrying a 1.48 GWA (1.00 is the top mark on PUP&rsquo;s scale).</span></li>
+        <li><span class="n">02</span><span>Builds and automates real infrastructure &mdash; enterprise networks, embedded hardware, custom PCBs &mdash; and treats AI prompt engineering as a working instrument across every project and role below, not an add-on.</span></li>
+        <li><span class="n">03</span><span>Holds networking and security credentials (CCNA, Juniper Junos, ISC2 CC) alongside hands-on QA, hardware fabrication, and digital-marketing experience.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head"><h2>Experience</h2></div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">Jul 2024 &mdash;<br>Jul 2026</div>
+          <div>
+            <h3>AI-Assisted Digital Marketing Specialist</h3>
+            <div class="tl-org">Eminence Constructions Corp</div>
+            <ul>
+              <li>Managed digital marketing content creation using AI prompt engineering &mdash; remodeling captions, promotional campaigns, and customer-focused social posts.</li>
+              <li>Built AI-assisted marketing workflows that lifted content production efficiency 70%+, speeding up posts for kitchen, bathroom, and interior remodeling services.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Jul 2025 &mdash;<br>Sep 2025</div>
+          <div>
+            <h3>Quality Assurance Intern</h3>
+            <div class="tl-org">Hooli Software Company</div>
+            <ul>
+              <li><strong>Microsoft Locker Platform</strong> &mdash; ran functional, regression, and responsive testing across devices and screen sizes, surfacing 30+ scenarios and edge cases.</li>
+              <li><strong>Passport Depot</strong> &mdash; designed 50+ positive and negative test cases; AI-assisted workflows lifted testing efficiency 50%+.</li>
+              <li>Wrote and maintained test documentation with AI-assisted prompt engineering, improving test coverage 40%+.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head"><h2>Projects</h2></div>
+      <div class="cards">
+        <article class="card card--media" data-project="vitalyze" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="card-media"><img src="vitalyze-form.png" alt="Vitalyze-Form admin dashboard with assessment filters, AI-generated health insights, and status breakdown" loading="lazy"></div>
+          <div class="card-body">
+            <h3>Vitalyze-Form &mdash; Vital Signs Kiosk</h3>
+            <p>Full-stack kiosk system for unattended vital-signs collection: ESP32 sensor stations (RFID check-in, pulse oximeter, IR thermometer, height/weight) reporting live heartbeats to a NestJS/TypeORM backend, with a React admin dashboard for device status, patient records, and OCR-assisted data entry.</p>
+            <div class="tagrow">
+              <span class="tag">React</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">TypeORM/MySQL</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">OCR</span>
+            </div>
+            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
+          </div>
+        </article>
+
+        <article class="card card--media" data-project="pnpitms" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="card-media"><img src="pnp-itms.png" alt="PNP ITMS Department landing page with a chooser listing BMI System, Intrusion Detection, Environment Monitoring, Hardware Inventory, and PC Information System" loading="lazy"></div>
+          <div class="card-body">
+            <h3>PNP ITMS &mdash; IT Management System</h3>
+            <p>Multi-domain platform for the PNP ITMS Department, built on the same ESP32 + NestJS/React foundation as Vitalyze-Form: a BMI screening kiosk (QR-code check-in), intrusion detection, environment (smoke/temperature) monitoring, hardware inventory, and per-machine PC information &amp; security assessment &mdash; each behind its own role-scoped login.</p>
+            <div class="tagrow">
+              <span class="tag">React</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">TypeORM/MySQL</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">QR Codes</span>
+            </div>
+            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></div>
+          <h3>Multi-Campus Network Automation</h3>
+          <p>Ansible-based automation for device configuration, VLAN provisioning, routing deployment, and validation across multiple campuses &mdash; cut repetitive manual work 60%+. AI prompt engineering generated, optimized, and debugged the playbooks, lifting development efficiency 50%+.</p>
+          <div class="tagrow">
+            <span class="tag">Ansible</span>
+            <span class="tag">VLANs</span>
+            <span class="tag">Routing</span>
+            <span class="tag">Prompt Engineering</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div>
+          <h3>Heart Rate Monitoring System</h3>
+          <p>End-to-end Arduino heart-rate monitor: embedded firmware, a custom-fabricated PCB, and a companion mobile app for real-time visualization and local logging. AI-assisted prompt engineering ran through code generation, debugging, and optimization &mdash; cutting development time 50%+.</p>
+          <div class="tagrow">
+            <span class="tag">Arduino</span>
+            <span class="tag">PCB Design &amp; Fab</span>
+            <span class="tag">Mobile App</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 8V4h16v4M6 18h12M8 12h8M4 8h16v10H4z"/></svg></div>
+          <h3>Print Production &amp; Layout</h3>
+          <p>Produced 500+ receipt booklets a month (25,000+ pages), building and modifying print layouts for business forms and custom documents, plus routine printer maintenance and troubleshooting to keep production moving.</p>
+          <div class="tagrow">
+            <span class="tag">Print Layout</span>
+            <span class="tag">QC</span>
+            <span class="tag">Equipment Upkeep</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="specifications">
+    <div class="wrap">
+      <div class="section-head"><h2>Specifications</h2></div>
+      <div class="specs">
+        <div>
+          <div class="gwa-card">
+            <span class="num">1.48</span>
+            <span class="cap">GENERAL WEIGHTED AVERAGE</span>
+          </div>
+          <div class="edu-org">
+            <strong>Polytechnic University of the Philippines</strong>
+            B.S. Computer Engineering &middot; 3rd Year
+          </div>
+        </div>
+
+        <div>
+        <div class="cert-cards">
+          <div class="cert-card" data-project="ccna" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="ccna-cert.png" alt="Cisco Certified Network Associate certificate for Jan Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <img class="cert-badge" src="ccna-badge.png" alt="" loading="lazy">
+              <div class="cert-card-text"><span class="cert-name">CCNA</span><span class="cert-sub">Cisco Certified Network&nbsp;Associate</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="jncia" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="jncia-cert.png" alt="Juniper Networks Certified Associate, Junos (JNCIA-Junos) certificate for Jan Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <img class="cert-badge" src="juniper-badge.png" alt="" loading="lazy">
+              <div class="cert-card-text"><span class="cert-name">JNCIA&#8209;Junos</span><span class="cert-sub">Juniper Networks Certified&nbsp;Associate</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="arista" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="arista-cert.png" alt="Network Automation Professional Certificate by Arista Networks, LinkedIn Learning, for Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">Network Automation Professional</span><span class="cert-sub">Arista Networks &middot; LinkedIn&nbsp;Learning</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="netops" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="netops-cert.png" alt="NetOps DevOps for Network Engineers, Automating Networks certificate, LinkedIn Learning, for Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">NetOps: Automating Networks</span><span class="cert-sub">DevOps for Network Engineers &middot; LinkedIn&nbsp;Learning</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="appkademiya" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="appkademiya-cert.png" alt="NetOps Certified Engineer (NTO-101) certificate by Appkademiya for Jan Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">NetOps Certified Engineer</span><span class="cert-sub">NTO&#8209;101 &middot; Appkademiya</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="modernai" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="modernai-cert.png" alt="Introduction to Modern AI certificate of course completion, Cisco Networking Academy, for Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">Introduction to Modern AI</span><span class="cert-sub">Cisco Networking&nbsp;Academy</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="cc" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="isc2-cc-scoresheet.png" alt="ISC2 Certified in Cybersecurity (CC) provisional pass letter, printed score sheet, for Jan Ace J Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">CC</span><span class="cert-sub">ISC2 Certified in&nbsp;Cybersecurity</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="certs">
+          <div class="cert"><span class="cert-name">Typing Contest Champion</span><span class="cert-sub">2025</span></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head"><h2>Skills</h2></div>
+      <div class="legend">
+        <div class="legend-group">
+          <span class="label">AI &amp; Automation</span>
+          <div class="legend-tags">
+            <span>Prompt Engineering</span>
+            <span>AI-Assisted Development</span>
+            <span>AI Workflows</span>
+            <span>Automation Scripting</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <span class="label">Content &amp; Growth</span>
+          <div class="legend-tags">
+            <span>AI Content Creation</span>
+            <span>Content Strategy</span>
+            <span>Marketing Automation</span>
+            <span>Social Media Management</span>
+            <span>Content Optimization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;width:100%;">
+    <span class="end">&copy; 2026 Jan Ace Lazo</span>
+    <div class="contact">
+      <button class="copy-btn" data-copy="acelazo617@gmail.com" aria-label="Copy email address">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+        <span class="copy-label">acelazo617@gmail.com</span>
+      </button>
+      <button class="copy-btn" data-copy="09760721613" aria-label="Copy phone number">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+        <span class="copy-label">0976 072 1613</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<div class="project-modal-overlay" id="project-modal" hidden>
+  <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <div class="pm-header">
+      <h3 id="project-modal-title"></h3>
+      <button class="project-modal-close" id="project-modal-close" aria-label="Close details">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3l10 10M13 3 3 13"/></svg>
+      </button>
+    </div>
+    <div class="project-modal-scroll">
+      <div class="pm-carousel" id="pm-carousel">
+        <div class="pm-carousel-track" id="pm-carousel-track"></div>
+        <button class="pm-nav pm-nav-prev" id="pm-prev" aria-label="Previous image">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>
+        </button>
+        <button class="pm-nav pm-nav-next" id="pm-next" aria-label="Next image">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+        <span class="pm-counter" id="pm-counter"></span>
+        <div class="pm-dots" id="pm-dots"></div>
+      </div>
+      <div class="project-modal-body">
+        <p id="project-modal-desc"></p>
+        <div class="pm-features" id="project-modal-points"></div>
+        <div class="pm-footer">
+          <div>
+            <span class="pm-label">Built with</span>
+            <div class="tagrow" id="project-modal-tags"></div>
+          </div>
+          <div class="project-modal-link" id="project-modal-link"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var menuBtn = document.getElementById("menu-btn");
+  var menu = document.getElementById("nav-links");
+
+  function closeMenu(){
+    menuBtn.setAttribute("aria-expanded", "false");
+    menu.hidden = true;
+  }
+
+  if (menuBtn && menu) {
+    var mq = window.matchMedia("(max-width: 760px)");
+    function syncForWidth(){
+      if (mq.matches) { menu.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); }
+      else { menu.hidden = false; }
+    }
+    syncForWidth();
+    mq.addEventListener("change", syncForWidth);
+
+    menuBtn.addEventListener("click", function(){
+      var open = menuBtn.getAttribute("aria-expanded") === "true";
+      menuBtn.setAttribute("aria-expanded", String(!open));
+      menu.hidden = open;
+    });
+
+    menu.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click", function(){
+        if (mq.matches) closeMenu();
+      });
+    });
+  }
+
+  document.querySelectorAll(".copy-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var text = btn.getAttribute("data-copy");
+      var label = btn.querySelector(".copy-label");
+      var original = label.textContent;
+
+      function done(ok){
+        label.textContent = ok ? "copied" : original;
+        btn.classList.toggle("copied", ok);
+        setTimeout(function(){
+          label.textContent = original;
+          btn.classList.remove("copied");
+        }, 1400);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function(){ done(true); }).catch(function(){ done(false); });
+      } else {
+        done(false);
+      }
+    });
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll("#nav-links a:not(.cta-link)"));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var idx = sections.indexOf(entry.target);
+        if (idx === -1) return;
+        if (entry.isIntersecting) {
+          links.forEach(function(l){ l.classList.remove("current"); });
+          links[idx].classList.add("current");
+        }
+      });
+    }, { rootMargin: "-40% 0px -50% 0px" });
+
+    sections.forEach(function(s){ if (s) observer.observe(s); });
+  }
+
+  /* project details modal */
+
+  var PROJECT_DETAILS = {
+    vitalyze: {
+      title: "Vitalyze-Form — Vital Signs Kiosk",
+      image: "vitalyze-form.png",
+      alt: "Vitalyze-Form admin dashboard with assessment filters, AI-generated health insights, and status breakdown",
+      description: "Full-stack kiosk system for unattended vital-signs collection, built end to end: firmware, backend, and admin UI.",
+      points: [
+        "ESP32 sensor stations for RFID check-in, pulse oximetry, IR temperature, and height/weight, each reporting a live device heartbeat.",
+        "NestJS + TypeORM/MySQL backend with role-scoped auth for the admin and patient portals.",
+        "A rule-based Health Insights engine on the dashboard that flags out-of-range or implausible readings per assessment.",
+        "OCR-assisted intake for scanned records, PDF report export, and a device-status page for the whole kiosk fleet."
+      ],
+      tags: ["React", "NestJS", "TypeORM/MySQL", "ESP32", "OCR"]
+    },
+    pnpitms: {
+      title: "PNP ITMS — IT Management System",
+      image: "pnp-itms.png",
+      alt: "PNP ITMS Department landing page with a chooser listing BMI System, Intrusion Detection, Environment Monitoring, Hardware Inventory, and PC Information System",
+      description: "Multi-domain platform for the Philippine National Police ITMS Department, built on the same ESP32 + NestJS/React foundation as Vitalyze-Form. A single landing page routes into five independent systems, each behind its own login and its own data pipeline.",
+      points: [
+        "BMI System — an RFID tap identifies personnel, then an admin starts the session and the ESP32 kiosk polls for that signal before prompting for height and weight, posting each reading live. The backend computes BMI and Ideal Body Weight and classifies against both WHO bands and an age-adjusted PNP “Acceptable BMI” table (upper bound widens from 24.9 at ≤29 years to 27.0 at 51+).",
+        "Intrusion Detection — an ESP32 posts triggered/clear events from a beam-break sensor. The backend keeps a live status and writes a log entry only on genuine state changes, while the dashboard polls status every second and history every 5 seconds.",
+        "Environment Monitoring — an ESP32 posts temperature and smoke readings every 3 seconds. Fixed thresholds (smoke ≥ 1800, temperature ≥ 50°C) classify each reading as normal, smoke detected, or high temperature, logging only on state transitions.",
+        "Hardware Inventory — admins manage devices directly, or an unattended local collector agent (authenticated by a shared secret, not a user session) posts a full report — installed software, missing updates, USB history, network adapters, printers — matched to a device by serial number or auto-registered if new.",
+        "PC Information System — a batch workflow: admins import a CSV export from a forensics tool, parsed into security-assessment, network/malicious-connection, and functional-testing sections per machine, browsable by category and component status."
+      ],
+      gallery: [
+        { src: "pnp-gallery-bmi.png", alt: "BMI System admin dashboard with BMI distribution and trends", caption: "BMI System" },
+        { src: "pnp-gallery-intrusion.png", alt: "Intrusion Detection live sensor status and activity log", caption: "Intrusion Detection" },
+        { src: "pnp-gallery-environment.png", alt: "Environment Monitoring live temperature and smoke readings", caption: "Environment Monitoring" },
+        { src: "pnp-gallery-inventory.png", alt: "Hardware Inventory dashboard with device breakdown and alerts", caption: "Hardware Inventory" },
+        { src: "pnp-gallery-pcinfo.png", alt: "PC Information System risk distribution and component health", caption: "PC Information System" }
+      ],
+      tags: ["React", "NestJS", "TypeORM/MySQL", "ESP32", "QR Codes"]
+    },
+    ccna: {
+      title: "CCNA — Cisco Certified Network Associate",
+      image: "ccna-cert.png",
+      alt: "Cisco Certified Network Associate certificate for Jan Ace Lazo",
+      description: "Covers IP routing and switching, VLANs, wireless, IP services, security fundamentals, and network automation basics.",
+      points: [
+        "Certified May 28, 2026 — valid through May 28, 2029.",
+        "Cisco ID No. CSCO15108046.",
+        "Verify at cisco.com/go/verifycertificate (Verification No. 9b0ca94c693742baabb6b93eb7a8dd13)."
+      ],
+      tags: ["Routing & Switching", "VLANs", "Network Security"],
+      link: { label: "Verify certificate", url: "https://www.cisco.com/go/verifycertificate" }
+    },
+    jncia: {
+      title: "JNCIA‑Junos — Juniper Networks Certified Associate",
+      image: "jncia-cert.png",
+      alt: "Juniper Networks Certified Associate, Junos (JNCIA-Junos) certificate for Jan Ace Lazo",
+      description: "Validates foundational knowledge of Junos OS, routing fundamentals, and Juniper network device operations.",
+      points: [
+        "Awarded August 21, 2026.",
+        "Credential code 2c416dec10904ce88b483f9f9625607e."
+      ],
+      tags: ["Junos OS", "Routing Fundamentals", "Network Ops"],
+      link: { label: "Verify certificate", url: "https://cp.certmetrics.com/juniper/en/public/verify/credential" }
+    },
+    arista: {
+      title: "Network Automation Professional Certificate — Arista Networks",
+      image: "arista-cert.png",
+      alt: "Network Automation Professional Certificate by Arista Networks, LinkedIn Learning, for Ace Lazo",
+      description: "LinkedIn Learning path covering NetOps practices, network automation tooling, and Linux network administration.",
+      points: [
+        "9 hours 32 minutes across the full learning path, completed Jun 30, 2026.",
+        "Top skills covered: NetOps, Network Automation, Linux Network Administration."
+      ],
+      tags: ["NetOps", "Network Automation", "Linux"],
+      link: { label: "View on LinkedIn", url: "https://www.linkedin.com/learning/certificates/bde567d7757ef47d10243e56ed165a10c33959ce86e4ed1eb70787018c48761d?trk=share_certificate" }
+    },
+    netops: {
+      title: "NetOps (DevOps for Network Engineers): Automating Networks",
+      image: "netops-cert.png",
+      alt: "NetOps DevOps for Network Engineers, Automating Networks certificate, LinkedIn Learning, for Ace Lazo",
+      description: "LinkedIn Learning course on applying DevOps practices — automation, version control, CI-style workflows — to network engineering.",
+      points: [
+        "2 hours 47 minutes, completed Jun 29, 2026.",
+        "Top skills covered: NetOps, DevOps."
+      ],
+      tags: ["NetOps", "DevOps"],
+      link: { label: "View on LinkedIn", url: "https://www.linkedin.com/learning/certificates/701deaed01ce8bb7a5b18351c88aa75e03a769369831460632a7e046a3caa0ab" }
+    },
+    appkademiya: {
+      title: "NetOps Certified Engineer (NTO‑101) — Appkademiya",
+      image: "appkademiya-cert.png",
+      alt: "NetOps Certified Engineer NTO-101 certificate of achievement by Appkademiya for Jan Ace Lazo",
+      description: "Cybersecurity-track certification module on NetOps engineering fundamentals, digitally verified by Appkademiya.",
+      points: [
+        "Issued August 31, 2026 — status: Digitally Verified.",
+        "Authorized by Rommel Jay Gadil, Founder of Appkademiya (CISSP, ISO 27001 Lead Auditor)."
+      ],
+      tags: ["NetOps", "Cybersecurity"],
+      link: { label: "Verify certificate", url: "https://appkademiya.online/verify/CERT-NETOPS-CERTIFIED-ENGINEER-NTO101-20260831-4EC3E0BDC49C" }
+    },
+    modernai: {
+      title: "Introduction to Modern AI — Cisco Networking Academy",
+      image: "modernai-cert.png",
+      alt: "Introduction to Modern AI certificate of course completion, Cisco Networking Academy, for Ace Lazo",
+      description: "Student-level credential covering practical modern-AI skills: core ML concepts, computer vision apps, machine translation, and working with LLMs.",
+      points: [
+        "Explains core AI/ML concepts, image classification, and object detection basics.",
+        "Prompts and uses LLM chatbots for idea generation, summarization, rewording, grading, and two-way dialogue (e.g. mock interviews).",
+        "Uses LLMs with tools (web search, page scraping) and multimodal prompting with images and text.",
+        "Issued Dec 13, 2025."
+      ],
+      tags: ["AI/ML Fundamentals", "LLM Prompting", "Computer Vision"]
+    },
+    cc: {
+      title: "CC — ISC2 Certified in Cybersecurity",
+      image: "isc2-cc-scoresheet.png",
+      alt: "ISC2 Certified in Cybersecurity (CC) provisional pass letter, printed score sheet, for Jan Ace J Lazo",
+      description: "Printed score sheet from the examination site, provisionally confirming a pass on the ISC2 Certified in Cybersecurity (CC) exam.",
+      points: [
+        "Exam date: June 24, 2026. Candidate ID/Examination number: 4093837.",
+        "Result is provisional pending further psychometric and forensic evaluation before a final certification decision.",
+        "Also reflected in the ISC2 candidate portal under Courses and Exams as “Passed.”"
+      ],
+      tags: ["Cybersecurity Fundamentals", "Security Principles", "Incident Response"]
+    }
+  };
+
+  var modal = document.getElementById("project-modal");
+  var modalBox = modal ? modal.querySelector(".project-modal") : null;
+  var modalTitle = document.getElementById("project-modal-title");
+  var modalDesc = document.getElementById("project-modal-desc");
+  var modalPoints = document.getElementById("project-modal-points");
+  var modalTags = document.getElementById("project-modal-tags");
+  var modalLink = document.getElementById("project-modal-link");
+  var modalClose = document.getElementById("project-modal-close");
+  var carouselEl = document.getElementById("pm-carousel");
+  var trackEl = document.getElementById("pm-carousel-track");
+  var dotsEl = document.getElementById("pm-dots");
+  var counterEl = document.getElementById("pm-counter");
+  var prevBtn = document.getElementById("pm-prev");
+  var nextBtn = document.getElementById("pm-next");
+  var lastTrigger = null;
+  var slides = [];
+  var slideIndex = 0;
+  var closeTimer = null;
+
+  function buildSlides(data){
+    if (data.gallery && data.gallery.length) {
+      return data.gallery.map(function(g){ return { src: g.src, alt: g.alt, caption: g.caption }; });
+    }
+    return [{ src: data.image, alt: data.alt, caption: null }];
+  }
+
+  function goToSlide(i){
+    if (!slides.length) return;
+    slideIndex = ((i % slides.length) + slides.length) % slides.length;
+    trackEl.style.transform = "translateX(-" + (slideIndex * 100) + "%)";
+    Array.prototype.forEach.call(dotsEl.children, function(dot, idx){
+      dot.classList.toggle("active", idx === slideIndex);
+    });
+    counterEl.textContent = (slideIndex + 1) + " / " + slides.length;
+  }
+
+  function renderCarousel(){
+    trackEl.innerHTML = "";
+    dotsEl.innerHTML = "";
+
+    slides.forEach(function(s, i){
+      var slide = document.createElement("div");
+      slide.className = "pm-slide";
+      var img = document.createElement("img");
+      img.src = s.src;
+      img.alt = s.alt;
+      img.loading = "lazy";
+      slide.appendChild(img);
+      if (s.caption) {
+        var cap = document.createElement("span");
+        cap.className = "pm-slide-caption";
+        cap.textContent = s.caption;
+        slide.appendChild(cap);
+      }
+      trackEl.appendChild(slide);
+
+      var dot = document.createElement("button");
+      dot.setAttribute("aria-label", "Go to image " + (i + 1));
+      dot.addEventListener("click", function(){ goToSlide(i); });
+      dotsEl.appendChild(dot);
+    });
+
+    carouselEl.classList.toggle("single", slides.length <= 1);
+    goToSlide(0);
+  }
+
+  function openProjectModal(id, trigger){
+    var data = PROJECT_DETAILS[id];
+    if (!data || !modal) return;
+
+    clearTimeout(closeTimer);
+    lastTrigger = trigger || null;
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.description;
+
+    modalPoints.innerHTML = "";
+    data.points.forEach(function(pt){
+      var card = document.createElement("div");
+      card.className = "pm-feature";
+      var sep = pt.indexOf("—");
+      if (sep > -1 && sep < 40) {
+        var h4 = document.createElement("h4");
+        h4.textContent = pt.slice(0, sep).trim();
+        var p = document.createElement("p");
+        p.textContent = pt.slice(sep + 1).trim();
+        card.appendChild(h4);
+        card.appendChild(p);
+      } else {
+        var pOnly = document.createElement("p");
+        pOnly.textContent = pt;
+        card.appendChild(pOnly);
+      }
+      modalPoints.appendChild(card);
+    });
+
+    slides = buildSlides(data);
+    renderCarousel();
+    if (modalBox) modalBox.classList.toggle("has-gallery", slides.length > 1);
+
+    modalTags.innerHTML = "";
+    data.tags.forEach(function(tag){
+      var span = document.createElement("span");
+      span.className = "tag";
+      span.textContent = tag;
+      modalTags.appendChild(span);
+    });
+
+    modalLink.innerHTML = "";
+    if (data.link) {
+      var a = document.createElement("a");
+      a.href = data.link.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = data.link.label + " ↗";
+      modalLink.appendChild(a);
+    }
+
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    void modal.offsetWidth;
+    modal.classList.add("open");
+    modalClose.focus();
+  }
+
+  function closeProjectModal(){
+    if (!modal || modal.hidden) return;
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+    if (lastTrigger) lastTrigger.focus();
+    closeTimer = setTimeout(function(){ modal.hidden = true; }, 300);
+  }
+
+  document.querySelectorAll("[data-project]").forEach(function(card){
+    card.addEventListener("click", function(){
+      openProjectModal(card.getAttribute("data-project"), card);
+    });
+    card.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openProjectModal(card.getAttribute("data-project"), card);
+      }
+    });
+  });
+
+  if (modal) {
+    modalClose.addEventListener("click", closeProjectModal);
+    modal.addEventListener("click", function(e){
+      if (e.target === modal) closeProjectModal();
+    });
+    prevBtn.addEventListener("click", function(){ goToSlide(slideIndex - 1); });
+    nextBtn.addEventListener("click", function(){ goToSlide(slideIndex + 1); });
+    document.addEventListener("keydown", function(e){
+      if (modal.hidden) return;
+      if (e.key === "Escape") closeProjectModal();
+      if (e.key === "ArrowRight") goToSlide(slideIndex + 1);
+      if (e.key === "ArrowLeft") goToSlide(slideIndex - 1);
+    });
+  }
+})();
+</script>
