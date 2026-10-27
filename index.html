@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://donxace.github.io/jan-ace-portfolio/og-image.png">
 <meta property="og:url" content="https://donxace.github.io/jan-ace-portfolio/">
 <meta name="twitter:card" content="summary_large_image">
-<script>try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>(function(){var d=document.documentElement,r=false;try{r=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}var on=false;try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.setAttribute("data-theme",t);on=localStorage.getItem("motion")==="on"}catch(e){}if(on)d.setAttribute("data-motion","on");if(!r||on)d.classList.add("motion")})()</script>
 <title>Jan Ace Lazo | Network Engineer (BS Computer Engineering)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -550,10 +550,6 @@
 
   /* ---------- v2: hero ---------- */
 
-  .hero-net{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-  .hero-net .l{stroke:var(--surface-2);stroke-width:1.5;fill:none;}
-  .hero-net .n{fill:var(--bg);stroke:var(--ink-dim);stroke-width:1.5;opacity:.45;}
-  .hero-net .pkt{fill:var(--accent);}
   .hero-stage{z-index:1;}
   .hero-id b.name{font-size:clamp(24px,2.6vw,36px);line-height:1.1;}
   .hero .hero-value{font-family:var(--display);font-stretch:90%;font-weight:600;font-size:clamp(20px,1.9vw,27px);line-height:1.2;color:var(--ink);}
@@ -620,7 +616,6 @@
   .copy-btn:focus-visible{outline-color:var(--accent);}
 
   @media (prefers-reduced-motion:reduce){
-    .hero-net .pkt{display:none;}
     .stat-status i{animation:none;}
   }
 
@@ -649,6 +644,94 @@
     .card--side{grid-template-columns:1fr;}
     .card--side .card-media{aspect-ratio:4/5;min-height:0;max-height:560px;}
   }
+
+  /* ---------- v5: certification logos ---------- */
+
+  .logos{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;}
+  .logo{display:flex;align-items:center;justify-content:center;height:52px;padding:0 10px;border:none;background:transparent;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+  :root[data-theme="dark"] .logo{background:#fff;}
+  .logo img.sq{height:38px;}
+  .logo img{height:26px;width:auto;max-width:112px;object-fit:contain;display:block;}
+  .logo:hover{transform:translateY(-2px) scale(1.06);box-shadow:inset 0 0 0 2px var(--accent);}
+  .logo:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  /* floating logos: on by default; if the device asks for reduced motion they stay still until the visitor turns them on */
+  .logos li{--d:5.4s;--l:0s;animation:float var(--d) ease-in-out var(--l) infinite;}
+  .logos li:nth-child(2){--d:6.1s;--l:-1.2s;}
+  .logos li:nth-child(3){--d:4.8s;--l:-2.4s;}
+  .logos li:nth-child(4){--d:6.6s;--l:-.6s;}
+  .logos li:nth-child(5){--d:5.8s;--l:-3.1s;}
+  .logos li:nth-child(6){--d:5s;--l:-1.9s;}
+  .logos li:nth-child(7){--d:6.3s;--l:-4.2s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  @media (prefers-reduced-motion:reduce){:root:not([data-motion="on"]) .logos li{animation:none;}}
+  .motion-btn{margin-top:2px;border:none;background:none;padding:6px 0;color:inherit;font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
+  .motion-btn[hidden]{display:none;}
+  @media (min-width:861px){.hero-side-r{width:min(32%,440px);}}
+  @media (max-width:860px){.logos{justify-content:flex-start;}}
+
+  /* ---------- v6: glimmer in the hero background ---------- */
+
+  .glimmer{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .glimmer i{position:absolute;left:var(--x);top:var(--y);width:calc(var(--s)*1.8);height:calc(var(--s)*1.8);background:var(--accent);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:twinkle var(--d) ease-in-out var(--l) infinite;}
+  @keyframes twinkle{0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}50%{opacity:.9;transform:scale(1) rotate(45deg);}}
+  @media (prefers-reduced-motion:reduce){:root:not([data-motion="on"]) .glimmer i{animation:none;opacity:.22;}}
+
+  /* =====================================================================
+     v7: MOTION SYSTEM. Tune every animation from these variables.
+     ===================================================================== */
+  :root{
+    --ease-out:cubic-bezier(.16,1,.3,1);   /* things entering */
+    --ease-in:cubic-bezier(.7,0,.84,0);    /* things leaving  */
+    --ease:var(--ease-out);
+    --dur-micro:160ms;                      /* buttons, links (150-200ms) */
+    --dur-hover:200ms;                      /* card hover, theme cross-fade */
+    --dur-hero:300ms;                       /* hero value statement + buttons */
+    --dur-reveal:450ms;                     /* section reveals (400-500ms) */
+    --dur-seq:800ms;                        /* longest sequence */
+    --dur-nav:300ms;                        /* hop marker slide */
+    --reveal-distance:20px;                 /* reveals move 16-24px */
+    --stagger:70ms;                         /* 60-80ms between siblings */
+  }
+
+  /* 5. section reveals (JS adds .reveal, then .in once, at 15% visible) */
+  .js .reveal{transform:translate3d(0,var(--reveal-distance),0);transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out);transition-delay:var(--d,0ms);}
+  .js .reveal.in{transform:none;}
+
+  /* 2. hero: name and title are never animated; the value statement and buttons fade up quickly */
+  @keyframes fadeUp{from{opacity:0;transform:translate3d(0,16px,0);}to{opacity:1;transform:none;}}
+  .motion .hero-value{animation:fadeUp var(--dur-hero) var(--ease-out) both;}
+  .motion .hero-actions{animation:fadeUp var(--dur-hero) var(--ease-out) var(--stagger) both;}
+
+  /* 1. hero topology canvas (drawn by JS; oversized by 12px so the parallax never shows an edge) */
+  .hero-net{position:absolute;left:-12px;top:-12px;width:calc(100% + 24px);height:calc(100% + 24px);z-index:0;pointer-events:none;}
+
+  /* 3. terminal cursor (blinks only when motion is allowed) */
+  .cursor{display:inline-block;width:.55em;height:1.05em;margin-left:2px;vertical-align:text-bottom;background:var(--accent);}
+  .motion .cursor{animation:blink 1.05s steps(2,start) infinite;}
+  @keyframes blink{to{visibility:hidden;}}
+
+  /* 4. traceroute nav: a ring slides to the active hop, a packet travels the path */
+  @media (min-width:761px){.navlinks{position:relative;}}
+  .hop-marker{position:absolute;left:0;top:0;width:17px;height:17px;border:2px solid var(--accent);border-radius:50%;opacity:0;pointer-events:none;transition:transform var(--dur-nav) var(--ease-out),opacity var(--dur-hover) var(--ease-out);}
+  .hop-packet{position:absolute;left:0;top:0;width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);opacity:0;pointer-events:none;}
+  @media (max-width:760px){.hop-marker,.hop-packet{display:none;}}
+
+  /* 7. project cards: lift 4px, deeper shadow, accent glow (shadow and glow live on ::before so only opacity animates) */
+  .card{transition:transform var(--dur-hover) var(--ease-out),background .25s var(--ease-out);}
+  .card--media{overflow:visible;}
+  .card::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;box-shadow:0 0 0 2px var(--accent),0 16px 32px -14px rgba(0,0,0,.4),0 0 24px -4px color-mix(in srgb,var(--accent) 50%,transparent);transition:opacity var(--dur-hover) var(--ease-out);}
+  .card:hover,.card:focus-visible{transform:translate3d(0,-4px,0);}
+  .card:hover::before,.card:focus-visible::before{opacity:1;}
+
+  /* 10. buttons and links: 150-200ms micro-interactions; the resume icon nudges down */
+  .btn,.navlinks a,.contact-links a,.copy-btn,.theme-btn,.menu-btn,.logo,.tl-proof{transition-duration:var(--dur-micro);transition-timing-function:var(--ease-out);}
+  .btn .dl{width:16px;height:16px;margin-right:8px;flex:none;transition:transform var(--dur-micro) var(--ease-out);}
+  .btn:hover .dl,.btn:focus-visible .dl{transform:translate3d(0,2px,0);}
+
+  /* 11. theme toggle: cross-fade (View Transitions API, with a plain fallback) */
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:var(--dur-hover);animation-timing-function:var(--ease-out);}
+  .theme-fade,.theme-fade *,.theme-fade *::before,.theme-fade *::after{transition:background-color var(--dur-hover) var(--ease-out),color var(--dur-hover) var(--ease-out),border-color var(--dur-hover) var(--ease-out),fill var(--dur-hover) var(--ease-out),stroke var(--dur-hover) var(--ease-out) !important;}
 </style>
 
 <nav class="topnav" aria-label="Primary">
@@ -688,37 +771,8 @@
 <div id="top"></div>
 
 <header class="hero">
-  <svg class="hero-net" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-    <path class="l" d="M110 120L330 60"/>
-    <path class="l" d="M330 60L520 210"/>
-    <path class="l" d="M520 210L250 330"/>
-    <path class="l" d="M250 330L40 420"/>
-    <path class="l" d="M110 120L250 330"/>
-    <path class="l" d="M900 90L1120 170"/>
-    <path class="l" d="M1120 170L1330 90"/>
-    <path class="l" d="M1120 170L1000 330"/>
-    <path class="l" d="M1000 330L1250 360"/>
-    <path class="l" d="M900 90L1000 330"/>
-    <path class="l" d="M520 210L900 90"/>
-    <circle class="n" cx="110" cy="120" r="7"/>
-    <circle class="n" cx="330" cy="60" r="7"/>
-    <circle class="n" cx="520" cy="210" r="7"/>
-    <circle class="n" cx="250" cy="330" r="7"/>
-    <circle class="n" cx="40" cy="420" r="7"/>
-    <circle class="n" cx="900" cy="90" r="7"/>
-    <circle class="n" cx="1120" cy="170" r="7"/>
-    <circle class="n" cx="1330" cy="90" r="7"/>
-    <circle class="n" cx="1000" cy="330" r="7"/>
-    <circle class="n" cx="1250" cy="360" r="7"/>
-    <circle class="pkt" r="3.5"><animateMotion dur="4.0s" begin="0.0s" repeatCount="indefinite" path="M110 120L330 60"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="5.5s" begin="0.7s" repeatCount="indefinite" path="M330 60L520 210"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="7.0s" begin="1.4s" repeatCount="indefinite" path="M520 210L900 90"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="4.0s" begin="2.1s" repeatCount="indefinite" path="M900 90L1120 170"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="5.5s" begin="2.8s" repeatCount="indefinite" path="M1120 170L1000 330"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="7.0s" begin="3.5s" repeatCount="indefinite" path="M1000 330L1250 360"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="4.0s" begin="4.2s" repeatCount="indefinite" path="M1120 170L1330 90"/></circle>
-    <circle class="pkt" r="3.5"><animateMotion dur="5.5s" begin="4.9s" repeatCount="indefinite" path="M520 210L250 330"/></circle>
-  </svg>
+  <div class="glimmer" aria-hidden="true"><i style="--x:59%;--y:74%;--s:12px;--d:4.8s;--l:-5.1s"></i><i style="--x:26%;--y:26%;--s:14px;--d:4.9s;--l:-3.7s"></i><i style="--x:25%;--y:15%;--s:12px;--d:4.3s;--l:-0.5s"></i><i style="--x:90%;--y:84%;--s:6px;--d:5.3s;--l:-2.4s"></i><i style="--x:59%;--y:86%;--s:18px;--d:5.4s;--l:-0.9s"></i><i style="--x:3%;--y:70%;--s:6px;--d:3.4s;--l:-1.1s"></i><i style="--x:32%;--y:79%;--s:6px;--d:6.0s;--l:-2.0s"></i><i style="--x:77%;--y:28%;--s:14px;--d:4.0s;--l:-1.8s"></i><i style="--x:2%;--y:87%;--s:6px;--d:4.8s;--l:-1.7s"></i><i style="--x:72%;--y:13%;--s:18px;--d:4.1s;--l:-4.5s"></i><i style="--x:67%;--y:39%;--s:6px;--d:3.5s;--l:-4.6s"></i><i style="--x:53%;--y:16%;--s:10px;--d:4.6s;--l:-5.7s"></i><i style="--x:89%;--y:3%;--s:8px;--d:4.0s;--l:-5.5s"></i><i style="--x:62%;--y:51%;--s:18px;--d:4.6s;--l:-0.4s"></i><i style="--x:82%;--y:28%;--s:18px;--d:4.2s;--l:-0.5s"></i><i style="--x:44%;--y:4%;--s:12px;--d:5.9s;--l:-0.7s"></i><i style="--x:33%;--y:93%;--s:6px;--d:3.2s;--l:-2.8s"></i><i style="--x:64%;--y:25%;--s:18px;--d:5.2s;--l:-2.7s"></i><i style="--x:26%;--y:19%;--s:12px;--d:5.5s;--l:-0.7s"></i><i style="--x:55%;--y:30%;--s:6px;--d:4.2s;--l:-5.8s"></i><i style="--x:77%;--y:41%;--s:6px;--d:4.0s;--l:-2.4s"></i><i style="--x:79%;--y:85%;--s:14px;--d:3.6s;--l:-5.9s"></i><i style="--x:29%;--y:59%;--s:10px;--d:3.2s;--l:-3.7s"></i><i style="--x:39%;--y:52%;--s:6px;--d:3.5s;--l:-1.3s"></i><i style="--x:83%;--y:34%;--s:6px;--d:5.4s;--l:-2.2s"></i><i style="--x:60%;--y:19%;--s:14px;--d:4.9s;--l:-3.4s"></i><i style="--x:51%;--y:26%;--s:18px;--d:3.8s;--l:-5.5s"></i><i style="--x:80%;--y:34%;--s:18px;--d:3.9s;--l:-4.4s"></i></div>
+  <canvas class="hero-net" id="hero-net" aria-hidden="true"></canvas>
   <div class="wrap hero-stage">
     <h1><span>Network</span><span>Engineer</span></h1>
     <picture class="hero-pic is-light"><source srcset="portrait-cutout.webp" type="image/webp"><img class="hero-cutout" src="portrait-cutout.png" alt="Portrait of Jan Ace Lazo" width="900" height="900" fetchpriority="high"></picture>
@@ -728,7 +782,7 @@
       <div class="hero-id"><b class="name">Jan Ace Lazo</b><span>BS Computer Engineering, PUP</span></div>
       <p class="hero-value">I design networks that stay up, stay secure, and scale.</p>
       <div class="hero-actions">
-        <a href="JanAceLazo_NetworkEngineer_Resume.pdf" class="btn btn-primary" download>Download Resume (PDF)</a>
+        <a href="JanAceLazo_NetworkEngineer_Resume.pdf" class="btn btn-primary" download><svg class="dl" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Resume (PDF)</a>
         <a href="#contact" class="btn btn-ghost">Contact Me</a>
       </div>
       <p class="hero-reach"><a href="mailto:acelazo617@gmail.com">acelazo617@gmail.com</a></p>
@@ -737,6 +791,16 @@
     <div class="hero-side hero-side-r">
       <div class="hero-id"><b>Open to work</b><span>Entry-level &amp; internships</span></div>
       <p>CCNA, JNCIA-Junos and ISC2 CC certified. Hands-on with OSPF, BGP, VLANs, ACLs and GRE over IPsec. Designed a 26-campus WAN: 138 devices, 72 ready-to-paste configurations.</p>
+      <ul class="logos" aria-label="Certifications. Select one to view the certificate.">
+        <li><button type="button" class="logo" data-project="ccna" aria-haspopup="dialog" aria-label="CCNA, Cisco Certified Network Associate: view certificate"><img class="sq" src="logos/ccna.png" alt="Cisco CCNA badge" height="28" loading="lazy"></button></li>
+        <li><button type="button" class="logo" data-project="jncia" aria-haspopup="dialog" aria-label="JNCIA-Junos, Juniper Networks Certified Associate: view certificate"><img class="sq" src="logos/jncia.png" alt="Juniper JNCIA-Junos badge" height="28" loading="lazy"></button></li>
+        <li><button type="button" class="logo" data-project="cc" aria-haspopup="dialog" aria-label="ISC2 Certified in Cybersecurity: view certificate"><img class="sq" src="logos/isc2-cc.png" alt="ISC2 CC logo" height="28" loading="lazy"></button></li>
+        <li><button type="button" class="logo" data-project="arista" aria-haspopup="dialog" aria-label="Network Automation Professional, Arista Networks: view certificate"><img src="logos/arista.png" alt="Arista Networks logo" height="28" loading="lazy"></button></li>
+        <li><button type="button" class="logo" data-project="netops" aria-haspopup="dialog" aria-label="NetOps: Automating Networks, LinkedIn Learning: view certificate"><img src="logos/linkedin-learning.png" alt="LinkedIn Learning logo" height="28" loading="lazy"></button></li>
+        <li><button type="button" class="logo" data-project="appkademiya" aria-haspopup="dialog" aria-label="NetOps Certified Engineer, Appkademiya: view certificate"><img src="logos/appkademiya.png" alt="Appkademiya logo" height="28" loading="lazy"></button></li>
+        <li><button type="button" class="logo" data-project="modernai" aria-haspopup="dialog" aria-label="Introduction to Modern AI, Cisco Networking Academy: view certificate"><img src="logos/cisco-netacad.png" alt="Cisco Networking Academy logo" height="28" loading="lazy"></button></li>
+      </ul>
+      <button type="button" class="motion-btn" id="motion-btn" hidden>Animations are off on your device. Turn on</button>
     </div>
   </div>
 </header>
@@ -1008,7 +1072,7 @@ Open to work:  <span class="ok">yes</span></code></pre>
         <p class="contact-lead">Hiring for a network or infrastructure role? I&rsquo;d like to hear about it.</p>
         <div class="contact-actions">
           <a class="btn btn-primary" href="mailto:acelazo617@gmail.com?subject=Hello%20Jan%20Ace">Email me</a>
-          <a class="btn btn-ghost" href="JanAceLazo_NetworkEngineer_Resume.pdf" download>Download Resume (PDF)</a>
+          <a class="btn btn-ghost" href="JanAceLazo_NetworkEngineer_Resume.pdf" download><svg class="dl" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Resume (PDF)</a>
         </div>
         <ul class="contact-links">
           <li><button class="copy-btn" data-copy="acelazo617@gmail.com" aria-label="Copy email address">
@@ -1071,27 +1135,48 @@ Open to work:  <span class="ok">yes</span></code></pre>
 (function(){
   "use strict";
 
-  // staggered rise-in on scroll; content stays visible if this never runs
-  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  // 5. SECTION REVEALS: fade up once at 15% visible; siblings stagger by --stagger. Content stays visible if this never runs.
+  var MOTION = document.documentElement.classList.contains("motion");
+  if ("IntersectionObserver" in window && MOTION) {
     document.documentElement.classList.add("js");
+    var staggerMs = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--stagger")) || 70;
     var groups = [
       ".section-head", ".notes li", ".term", ".skill-group", ".contact-body > *",
       ".tl-item", ".card", ".gwa-card", ".edu-org", ".cert-card", ".legend-group"
     ];
     var revealObs = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if (e.isIntersecting) { e.target.classList.add("in"); revealObs.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.style.willChange = "opacity, transform";                       // only while animating
+        el.addEventListener("transitionend", function done(ev){
+          if (ev.propertyName !== "opacity") return;
+          el.style.willChange = "";
+          el.removeEventListener("transitionend", done);
+        });
+        el.classList.add("in");
+        setTimeout(function(){ el.style.willChange = ""; }, 1200);           // safety net if transitionend never fires
+        revealObs.unobserve(el);
       });
-    }, {threshold: 0.12});
+    }, {threshold: 0.15});
     groups.forEach(function(sel){
       document.querySelectorAll(sel).forEach(function(el, i){
         el.classList.add("reveal");
-        el.style.setProperty("--d", Math.min(i, 5) * 70 + "ms");
+        el.style.setProperty("--d", Math.min(i, 5) * staggerMs + "ms");
         revealObs.observe(el);
       });
     });
   }
 
+  // let visitors who have reduced motion set on their device opt in to the floating logos
+  var motionBtn = document.getElementById("motion-btn");
+  if (motionBtn && window.matchMedia("(prefers-reduced-motion: reduce)").matches && document.documentElement.getAttribute("data-motion") !== "on") {
+    motionBtn.hidden = false;
+    motionBtn.addEventListener("click", function(){
+      try { localStorage.setItem("motion", "on"); } catch (e) {}
+      location.reload();
+    });
+  }
 
   // light / dark toggle (remembered per browser)
   var themeBtn = document.getElementById("theme-btn");
@@ -1102,31 +1187,53 @@ Open to work:  <span class="ok">yes</span></code></pre>
   if (themeBtn) {
     syncThemeBtn();
     themeBtn.addEventListener("click", function(){
+      // 11. THEME CROSS-FADE: View Transitions API when available, otherwise a 200ms colour transition
       var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
+      function swap(){ document.documentElement.setAttribute("data-theme", next); syncThemeBtn(); }
       try { localStorage.setItem("theme", next); } catch (e) {}
-      syncThemeBtn();
+      if (MOTION && document.startViewTransition) {
+        document.startViewTransition(swap);
+      } else if (MOTION) {
+        document.documentElement.classList.add("theme-fade");
+        swap();
+        setTimeout(function(){ document.documentElement.classList.remove("theme-fade"); }, 260);
+      } else { swap(); }
     });
   }
 
-  // the one terminal moment: type the summary once when it scrolls into view
+  // 3. TERMINAL: the full text is in the HTML. With motion it types once (about 30ms per tick, always under 2 seconds in total);
+  //    a click finishes it instantly. A cursor sits at the end.
   var termOut = document.getElementById("term-out");
-  if (termOut && "IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  var termBox = document.getElementById("term");
+  if (termOut) {
+    var cursor = document.createElement("span");
+    cursor.className = "cursor";
+    cursor.setAttribute("aria-hidden", "true");
     var finalHtml = termOut.innerHTML;
     var plain = termOut.textContent;
-    termOut.textContent = "";
-    var termObs = new IntersectionObserver(function(entries){
-      if (!entries[0].isIntersecting) return;
-      termObs.disconnect();
-      var i = 0;
-      (function tick(){
-        i += 4;
-        if (i >= plain.length) { termOut.innerHTML = finalHtml; return; }
-        termOut.textContent = plain.slice(0, i);
-        setTimeout(tick, 12);
-      })();
-    }, {threshold: 0.6});
-    termObs.observe(document.getElementById("term"));
+    var finished = false;
+    var finish = function(){ if (finished) return; finished = true; termOut.innerHTML = finalHtml; termOut.appendChild(cursor); };
+    if ("IntersectionObserver" in window && MOTION) {
+      termOut.textContent = "";
+      termOut.appendChild(cursor);
+      var termObs = new IntersectionObserver(function(entries){
+        if (!entries[0].isIntersecting) return;
+        termObs.disconnect();
+        var TICK = 30, step = Math.ceil(plain.length / (1800 / TICK)), i = 0;
+        (function tick(){
+          if (finished) return;
+          i += step;
+          if (i >= plain.length) { finish(); return; }
+          termOut.textContent = plain.slice(0, i);
+          termOut.appendChild(cursor);
+          setTimeout(tick, TICK);
+        })();
+      }, {threshold: 0.6});
+      termObs.observe(termBox);
+      termBox.addEventListener("click", finish);
+    } else {
+      finish();
+    }
   }
 
   var menuBtn = document.getElementById("menu-btn");
@@ -1194,6 +1301,7 @@ Open to work:  <span class="ok">yes</span></code></pre>
           links.forEach(function(l){ l.classList.remove("current"); });
           links[idx].classList.add("current");
           links.forEach(function(l, i){ l.classList.toggle("passed", i < idx); });
+          document.dispatchEvent(new CustomEvent("hopchange", {detail: {idx: idx}}));
         }
       });
     }, { rootMargin: "-40% 0px -50% 0px" });
@@ -1528,6 +1636,165 @@ Open to work:  <span class="ok">yes</span></code></pre>
       if (e.key === "ArrowLeft") goToSlide(slideIndex - 1);
     });
   }
+})();
+</script>
+
+<script>
+/* =====================================================================
+   MOTION MODULES: hero topology (canvas), traceroute hop marker, stat count-up.
+   Everything here is skipped, or drawn static, when motion is off (html has no .motion class).
+   ===================================================================== */
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var MOTION = root.classList.contains("motion");
+  function cssVar(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
+
+  /* ---- 1. HERO TOPOLOGY ----------------------------------------------------------------
+     18 nodes on desktop, 9 on mobile, thin links, nodes drifting a few px very slowly,
+     a glowing packet on a random link every 1.5-3s, mouse parallax up to 10px (desktop only).
+     Pauses when the hero is off-screen or the tab is hidden. Pixel ratio capped at 2. */
+  (function(){
+    var cv = document.getElementById("hero-net"), hero = document.querySelector(".hero");
+    if (!cv || !hero || !cv.getContext) return;
+    var ctx = cv.getContext("2d");
+    var nodes = [], links = [], packets = [], W = 0, H = 0;
+    var raf = 0, running = false, visible = true, last = 0, nextSpawn = 0;
+    var tx = 0, ty = 0, px = 0, py = 0, colors = {};
+    var fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function rng(seed){ return function(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
+    function rgba(hex, a){
+      var m = /^#([0-9a-f]{6})$/i.exec(hex); if (!m) return hex;
+      var n = parseInt(m[1], 16); return "rgba(" + (n >> 16 & 255) + "," + (n >> 8 & 255) + "," + (n & 255) + "," + a + ")";
+    }
+    function readColors(){ colors.line = cssVar("--ink-dim"); colors.acc = cssVar("--accent"); colors.bg = cssVar("--bg"); }
+
+    function build(){
+      W = cv.clientWidth; H = cv.clientHeight;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);              // cap pixel ratio at 2
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = W < 760 ? 9 : 18, r = rng(7);
+      var cols = Math.max(2, Math.round(Math.sqrt(n * W / H))), rows = Math.ceil(n / cols);
+      nodes = [];
+      for (var i = 0; i < n; i++) {
+        var c = i % cols, rw = Math.floor(i / cols);
+        nodes.push({x: (c + .5 + (r() - .5) * .7) / cols, y: (rw + .5 + (r() - .5) * .7) / rows, ph: r() * 6.28, sp: .6 + r() * .8});
+      }
+      links = []; var seen = {};
+      nodes.forEach(function(a, i){
+        nodes.map(function(b, j){ var dx = (a.x - b.x) * W, dy = (a.y - b.y) * H; return {j: j, d: dx * dx + dy * dy}; })
+          .filter(function(o){ return o.j !== i; }).sort(function(p, q){ return p.d - q.d; }).slice(0, 2)
+          .forEach(function(o){ var k = Math.min(i, o.j) + "-" + Math.max(i, o.j); if (!seen[k]) { seen[k] = 1; links.push([i, o.j]); } });
+      });
+      packets = [];
+      draw(performance.now());
+    }
+    function pos(n, t){
+      var dx = MOTION ? Math.sin(t / 6500 * n.sp + n.ph) * 6 : 0, dy = MOTION ? Math.cos(t / 7200 * n.sp + n.ph) * 5 : 0;
+      return [n.x * W + dx, n.y * H + dy];
+    }
+    function draw(t){
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineWidth = 1; ctx.strokeStyle = rgba(colors.line, .28);
+      links.forEach(function(l){ var a = pos(nodes[l[0]], t), b = pos(nodes[l[1]], t); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); });
+      ctx.strokeStyle = rgba(colors.line, .5); ctx.fillStyle = colors.bg;
+      nodes.forEach(function(n){ var p = pos(n, t); ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, 6.283); ctx.fill(); ctx.stroke(); });
+      ctx.fillStyle = colors.acc; ctx.shadowColor = colors.acc; ctx.shadowBlur = 10;       // the glow
+      packets.forEach(function(k){
+        var l = links[k.l], a = pos(nodes[k.dir ? l[1] : l[0]], t), b = pos(nodes[k.dir ? l[0] : l[1]], t);
+        ctx.beginPath(); ctx.arc(a[0] + (b[0] - a[0]) * k.t, a[1] + (b[1] - a[1]) * k.t, 2.6, 0, 6.283); ctx.fill();
+      });
+      ctx.shadowBlur = 0;
+    }
+    function frame(t){
+      if (!running) return;
+      var dt = Math.min(t - last, 64); last = t;
+      if (t >= nextSpawn) {                                             // a packet every 1.5-3s
+        packets.push({l: Math.floor(Math.random() * links.length), t: 0, dir: Math.random() < .5, s: 1 / (1200 + Math.random() * 900)});
+        nextSpawn = t + 1500 + Math.random() * 1500;
+      }
+      packets.forEach(function(k){ k.t += k.s * dt; });
+      packets = packets.filter(function(k){ return k.t < 1; });
+      if (fine) {                                                       // parallax: transform only, eased
+        px += (tx - px) * .08; py += (ty - py) * .08;
+        cv.style.transform = "translate3d(" + px.toFixed(2) + "px," + py.toFixed(2) + "px,0)";
+      }
+      draw(t);
+      raf = requestAnimationFrame(frame);
+    }
+    function start(){ if (!MOTION || running || !visible || document.hidden) return; running = true; last = performance.now(); cv.style.willChange = "transform"; raf = requestAnimationFrame(frame); }
+    function stop(){ running = false; cancelAnimationFrame(raf); cv.style.willChange = ""; }
+
+    readColors(); build();
+    if (MOTION) {
+      new IntersectionObserver(function(e){ visible = e[0].isIntersecting; visible ? start() : stop(); }).observe(hero);   // pause off-screen
+      document.addEventListener("visibilitychange", function(){ document.hidden ? stop() : start(); });                   // pause in background tab
+      if (fine) {
+        hero.addEventListener("pointermove", function(e){
+          var r = hero.getBoundingClientRect();
+          tx = ((e.clientX - r.left) / r.width - .5) * 20;               // max 10px either way
+          ty = ((e.clientY - r.top) / r.height - .5) * 20;
+        }, {passive: true});
+        hero.addEventListener("pointerleave", function(){ tx = 0; ty = 0; });
+      }
+      start();
+    }
+    if (window.ResizeObserver) new ResizeObserver(build).observe(hero);
+    new MutationObserver(function(){ readColors(); if (!running) draw(performance.now()); }).observe(root, {attributes: true, attributeFilter: ["data-theme"]});
+  })();
+
+  /* ---- 4. TRACEROUTE NAV: sliding ring + travelling packet (300ms) ---- */
+  (function(){
+    var nav = document.getElementById("nav-links");
+    if (!nav || !MOTION || !nav.animate) return;
+    var ring = document.createElement("span"); ring.className = "hop-marker"; ring.setAttribute("aria-hidden", "true");
+    var pkt = document.createElement("span"); pkt.className = "hop-packet"; pkt.setAttribute("aria-hidden", "true");
+    nav.appendChild(ring); nav.appendChild(pkt);
+    var links = [].slice.call(nav.querySelectorAll("a")), cur = -1;
+    function spot(i){ var a = links[i]; return {x: a.offsetLeft + 4.5, y: a.offsetTop + a.offsetHeight / 2, cta: a.classList.contains("cta-link")}; }
+    function place(i, instant){
+      var s = spot(i);
+      if (instant) ring.style.transition = "none";
+      ring.style.transform = "translate3d(" + (s.x - 8.5) + "px," + (s.y - 8.5) + "px,0)";
+      ring.style.opacity = s.cta ? 0 : 1;                                // the Contact button has no dot
+      if (instant) { void ring.offsetWidth; ring.style.transition = ""; }
+    }
+    document.addEventListener("hopchange", function(e){
+      var i = e.detail.idx;
+      if (i === cur || !nav.offsetParent) return;
+      if (cur === -1) { place(i, true); cur = i; return; }
+      var a = spot(cur), b = spot(i);
+      pkt.animate([
+        {transform: "translate3d(" + (a.x - 2.5) + "px," + (a.y - 2.5) + "px,0)", opacity: 1},
+        {transform: "translate3d(" + (b.x - 2.5) + "px," + (b.y - 2.5) + "px,0)", opacity: 1, offset: .85},
+        {transform: "translate3d(" + (b.x - 2.5) + "px," + (b.y - 2.5) + "px,0)", opacity: 0}
+      ], {duration: 300, easing: "cubic-bezier(.16,1,.3,1)"});
+      place(i, false); cur = i;
+    });
+    window.addEventListener("resize", function(){ if (cur > -1 && nav.offsetParent) place(cur, true); });
+  })();
+
+  /* ---- 6. STAT CARDS: count up from 0 on first view (1.2s, ease-out). The real number is in the HTML. ---- */
+  (function(){
+    var els = [].slice.call(document.querySelectorAll(".stat b")).filter(function(b){ return /^\d+$/.test(b.textContent.trim()); });
+    if (!els.length || !MOTION || !("IntersectionObserver" in window)) return;
+    els.forEach(function(b){ b.setAttribute("data-final", b.textContent.trim()); b.textContent = "0"; });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var b = e.target, end = +b.getAttribute("data-final"), t0 = performance.now();
+        (function step(t){
+          var p = Math.max(0, Math.min(1, (t - t0) / 1200)), eased = 1 - Math.pow(1 - p, 3);
+          b.textContent = Math.round(end * eased);
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }, {threshold: .4});
+    els.forEach(function(b){ io.observe(b); });
+  })();
 })();
 </script>
 

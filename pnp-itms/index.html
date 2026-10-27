@@ -10,7 +10,7 @@
 <meta property="og:description" content="Five systems on one NestJS and React platform, fed by ESP32 sensor boards. A case study by Jan Ace Lazo.">
 <meta property="og:image" content="https://donxace.github.io/jan-ace-portfolio/og-image.png">
 <meta name="theme-color" content="#F2F1F3">
-<script>try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>(function(){var d=document.documentElement,r=false;try{r=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}var on=false;try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.setAttribute("data-theme",t);on=localStorage.getItem("motion")==="on"}catch(e){}if(on)d.setAttribute("data-motion","on");if(!r||on)d.classList.add("motion")})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -18,7 +18,6 @@
   :root{
     --bg:#F2F1F3;--surface:#E9E6E8;--surface-2:#DEDADD;
     --ink:#1B1719;--ink-dim:#5F575B;--accent:#7B1E2C;--accent-ink:#ffffff;
-    --ease:cubic-bezier(.22,.85,.32,1);
     --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
     --display:'Archivo','Arial Narrow',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
@@ -214,7 +213,7 @@
   .cta small{display:block;margin-top:40px;opacity:.7;font-size:14px;}
 
   /* reveal (content is visible without JS) */
-  .js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+  .js .rv{opacity:0;}
   .js .rv.in{opacity:1;transform:none;}
   @media (prefers-reduced-motion:reduce){
     *{transition:none !important;animation:none !important;}
@@ -222,6 +221,54 @@
     .js .rv,.js .step{opacity:1;transform:none;}
     .pkt{display:none;}
   }
+
+  /* =====================================================================
+     v7: MOTION SYSTEM. Tune every animation from these variables.
+     ===================================================================== */
+  :root{
+    --ease-out:cubic-bezier(.16,1,.3,1);   /* things entering */
+    --ease-in:cubic-bezier(.7,0,.84,0);    /* things leaving  */
+    --ease:var(--ease-out);
+    --dur-micro:160ms;                      /* buttons, links */
+    --dur-hover:200ms;                      /* hover, tooltip, theme cross-fade */
+    --dur-reveal:450ms;                     /* section reveals */
+    --dur-seq:800ms;                        /* longest sequence */
+    --reveal-distance:20px;
+    --stagger:70ms;
+  }
+
+  /* 5. section reveals */
+  .js .rv{transform:translate3d(0,var(--reveal-distance),0);transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out);transition-delay:var(--d,0ms);}
+  .js .rv.in{transform:none;}
+
+  /* 8. USER JOURNEY: steps light up as they scroll into view and the connector line fills between them */
+  .step{transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out);}
+  .step>.lf{display:none;}
+  @media (min-width:981px){
+    .step:nth-child(1){z-index:5;}.step:nth-child(2){z-index:4;}.step:nth-child(3){z-index:3;}.step:nth-child(4){z-index:2;}
+    .step:not(:last-child)::after,.step>.lf{content:"";display:block;position:absolute;top:38px;left:54px;width:calc(100% - 22px);height:2px;background:var(--surface-2);}
+    .step>.lf{z-index:1;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform var(--dur-reveal) var(--ease-out);}
+    .step.filled>.lf{transform:scaleX(1);}
+  }
+
+  /* 9. ARCHITECTURE DIAGRAM: hover / focus / tap a node to highlight its links, dim the rest, speed up its packets, show a tooltip */
+  .diagram{position:relative;}
+  .link,.pkt,.node{transition:opacity var(--dur-hover) var(--ease-out);}
+  .link.dim,.pkt.dim{opacity:.18;}
+  .node.dim{opacity:.35;}
+  .tip{position:absolute;left:0;top:0;z-index:5;width:max-content;max-width:min(300px,80%);background:var(--bg);border:2px solid var(--accent);padding:12px 14px;font-size:14px;line-height:1.4;pointer-events:none;opacity:0;visibility:hidden;transform:translate3d(var(--tx,0px),calc(var(--ty,0px) + 6px),0);transition:opacity var(--dur-hover) var(--ease-in),transform var(--dur-hover) var(--ease-in),visibility 0s linear var(--dur-hover);}
+  .tip.show{opacity:1;visibility:visible;transform:translate3d(var(--tx,0px),var(--ty,0px),0);transition:opacity var(--dur-hover) var(--ease-out),transform var(--dur-hover) var(--ease-out),visibility 0s;}
+  .tip b{display:block;font-size:16px;margin-bottom:2px;}
+  .tip span{display:block;color:var(--ink-dim);}
+
+  /* 10. buttons and links: 150-200ms micro-interactions; the resume icon nudges down */
+  .btn,.contact-links a,.theme-btn,.back,.shot,.lb-btns button,.nodelist button{transition-duration:var(--dur-micro);transition-timing-function:var(--ease-out);}
+  .btn .dl{width:16px;height:16px;margin-right:8px;flex:none;transition:transform var(--dur-micro) var(--ease-out);}
+  .btn:hover .dl,.btn:focus-visible .dl{transform:translate3d(0,2px,0);}
+
+  /* 11. theme toggle: cross-fade (View Transitions API, with a plain fallback) */
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:var(--dur-hover);animation-timing-function:var(--ease-out);}
+  .theme-fade,.theme-fade *,.theme-fade *::before,.theme-fade *::after{transition:background-color var(--dur-hover) var(--ease-out),color var(--dur-hover) var(--ease-out),border-color var(--dur-hover) var(--ease-out),fill var(--dur-hover) var(--ease-out),stroke var(--dur-hover) var(--ease-out) !important;}
 </style>
 </head>
 <body>
@@ -316,17 +363,17 @@
       <div class="diagram">
         <svg viewBox="0 0 1100 560" role="group" aria-label="System architecture: three ESP32 boards and a PC collector agent send data over the network to a backend, which feeds a dashboard and alerts">
           <g class="links">
-            <path class="link" d="M220 102L360 282"/><path class="link" d="M220 222L360 282"/><path class="link" d="M220 342L360 282"/><path class="link" d="M220 462L360 282"/>
-            <path class="link" d="M510 282H640"/><path class="link" d="M810 282H900"/><path class="link" d="M725 314V400"/>
+            <path class="link" data-ends="a net" d="M220 102L360 282"/><path class="link" data-ends="b net" d="M220 222L360 282"/><path class="link" data-ends="c net" d="M220 342L360 282"/><path class="link" data-ends="d net" d="M220 462L360 282"/>
+            <path class="link" data-ends="net api" d="M510 282H640"/><path class="link" data-ends="api dash" d="M810 282H900"/><path class="link" data-ends="api alert" d="M725 314V400"/>
           </g>
           <g aria-hidden="true">
-            <circle class="pkt" r="4"><animateMotion dur="3.2s" repeatCount="indefinite" path="M220 102L360 282"/></circle>
-            <circle class="pkt" r="4"><animateMotion dur="2.8s" begin="0.7s" repeatCount="indefinite" path="M220 222L360 282"/></circle>
-            <circle class="pkt" r="4"><animateMotion dur="3.4s" begin="0.3s" repeatCount="indefinite" path="M220 342L360 282"/></circle>
-            <circle class="pkt" r="4"><animateMotion dur="4s" begin="1.2s" repeatCount="indefinite" path="M220 462L360 282"/></circle>
-            <circle class="pkt" r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M510 282H640"/></circle>
-            <circle class="pkt" r="4"><animateMotion dur="2s" begin="0.8s" repeatCount="indefinite" path="M810 282H900"/></circle>
-            <circle class="pkt" r="4"><animateMotion dur="2s" begin="1.5s" repeatCount="indefinite" path="M725 314V400"/></circle>
+            <circle class="pkt" data-ends="a net" data-dur="3.2" r="4"><animateMotion dur="3.2s" repeatCount="indefinite" path="M220 102L360 282"/></circle>
+            <circle class="pkt" data-ends="b net" data-dur="2.8" r="4"><animateMotion dur="2.8s" begin="0.7s" repeatCount="indefinite" path="M220 222L360 282"/></circle>
+            <circle class="pkt" data-ends="c net" data-dur="3.4" r="4"><animateMotion dur="3.4s" begin="0.3s" repeatCount="indefinite" path="M220 342L360 282"/></circle>
+            <circle class="pkt" data-ends="d net" data-dur="4" r="4"><animateMotion dur="4s" begin="1.2s" repeatCount="indefinite" path="M220 462L360 282"/></circle>
+            <circle class="pkt" data-ends="net api" data-dur="2.4" r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M510 282H640"/></circle>
+            <circle class="pkt" data-ends="api dash" data-dur="2" r="4"><animateMotion dur="2s" begin="0.8s" repeatCount="indefinite" path="M810 282H900"/></circle>
+            <circle class="pkt" data-ends="api alert" data-dur="2" r="4"><animateMotion dur="2s" begin="1.5s" repeatCount="indefinite" path="M725 314V400"/></circle>
           </g>
           <text class="lbl-svg" x="435" y="352">Wi-Fi + HTTP</text>
           <g class="node" tabindex="0" role="button" data-node="a" aria-label="Height and RFID board"><rect x="20" y="70" width="200" height="64"/><text x="36" y="98">Height + RFID</text><text class="sub" x="36" y="119">ESP32 kiosk board</text></g>
@@ -339,6 +386,7 @@
           <g class="node" tabindex="0" role="button" data-node="alert" aria-label="Alerts"><rect x="640" y="400" width="170" height="64"/><text x="656" y="428">Alerts</text><text class="sub" x="656" y="449">Email + SMS</text></g>
         </svg>
         <ul class="nodelist" id="nodelist" aria-label="System nodes"></ul>
+        <div class="tip" id="tip" role="tooltip"></div>
         <p class="arch-note">Arrows show the direction of the data. Packets are illustrative.</p>
       </div>
       <aside class="panel" id="panel" aria-live="polite"></aside>
@@ -437,7 +485,7 @@
     <div class="row">
       <a class="btn btn-primary" href="../#projects">See more projects</a>
       <a class="btn btn-ghost" href="../#contact">Contact me</a>
-      <a class="btn btn-ghost" href="../JanAceLazo_NetworkEngineer_Resume.pdf" download>Download resume</a>
+      <a class="btn btn-ghost" href="../JanAceLazo_NetworkEngineer_Resume.pdf" download><svg class="dl" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download resume</a>
     </div>
     <small>&copy; 2026 Jan Ace Lazo</small>
   </div>
@@ -454,33 +502,71 @@
 <script>
 (function(){
   "use strict";
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = !document.documentElement.classList.contains("motion");
 
   // theme
   var tb = document.getElementById("theme-btn");
   function sync(){ tb.setAttribute("aria-label", document.documentElement.getAttribute("data-theme")==="dark" ? "Switch to light mode" : "Switch to dark mode"); }
   sync();
   tb.addEventListener("click", function(){
+    // 11. THEME CROSS-FADE: View Transitions API when available, otherwise a 200ms colour transition
     var n = document.documentElement.getAttribute("data-theme")==="dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", n);
+    function swap(){ document.documentElement.setAttribute("data-theme", n); sync(); }
     try { localStorage.setItem("theme", n); } catch(e){}
-    sync();
+    if (!reduce && document.startViewTransition) { document.startViewTransition(swap); }
+    else if (!reduce) { document.documentElement.classList.add("theme-fade"); swap(); setTimeout(function(){ document.documentElement.classList.remove("theme-fade"); }, 260); }
+    else { swap(); }
   });
 
-  // scroll effects (content is visible if any of this fails)
-  if ("IntersectionObserver" in window && !reduce) {
-    document.documentElement.classList.add("js");
-    document.querySelectorAll(".prose,.roles,.cc,.next,.stat,.diagram,.panel").forEach(function(el){ el.classList.add("rv"); });
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }); }, {threshold:.12});
+  // 5 / 6 / 8. SCROLL EFFECTS: reveals, stat count-up, journey steps (content stays visible if any of this fails)
+  var root = document.documentElement;
+  var MOTION = !reduce;
+  var steps = [].slice.call(document.querySelectorAll("#steps .step"));
+  steps.slice(0, -1).forEach(function(s){ var f = document.createElement("i"); f.className = "lf"; f.setAttribute("aria-hidden", "true"); s.appendChild(f); });
+  if ("IntersectionObserver" in window && MOTION) {
+    root.classList.add("js");
+    var staggerMs = parseFloat(getComputedStyle(root).getPropertyValue("--stagger")) || 70;
+    document.querySelectorAll(".prose,.roles,.cc,.next,.stat,.diagram,.panel,.shot,.slot").forEach(function(el){ el.classList.add("rv"); });
+    document.querySelectorAll(".cards,.stats,.roles,.next,.gallery").forEach(function(g){      // stagger siblings in a group
+      [].forEach.call(g.children, function(c, i){ c.style.setProperty("--d", Math.min(i, 5) * staggerMs + "ms"); });
+    });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.style.willChange = "opacity, transform";                      // only while animating
+        el.addEventListener("transitionend", function done(ev){ if (ev.propertyName !== "opacity") return; el.style.willChange = ""; el.removeEventListener("transitionend", done); });
+        setTimeout(function(){ el.style.willChange = ""; }, 1200);
+        el.classList.add("in"); io.unobserve(el);
+      });
+    }, {threshold: .15});
     document.querySelectorAll(".rv").forEach(function(el){ io.observe(el); });
-    var steps = document.querySelectorAll("#steps .step");
+
+    // 8. journey: each step lights as it enters (a little stagger when several arrive together); the line fills behind it
     var so = new IntersectionObserver(function(es){
-      if(!es[0].isIntersecting) return; so.disconnect();
-      steps.forEach(function(s,i){ setTimeout(function(){ s.classList.add("on"); }, i*450); });
-    }, {threshold:.25});
-    so.observe(document.getElementById("steps"));
+      var batch = es.filter(function(e){ return e.isIntersecting || e.boundingClientRect.top < 0; })
+                    .map(function(e){ return steps.indexOf(e.target); }).sort(function(a, b){ return a - b; });
+      batch.forEach(function(i, k){
+        so.unobserve(steps[i]);
+        setTimeout(function(){ steps[i].classList.add("on"); if (i > 0) steps[i - 1].classList.add("filled"); }, k * 120);
+      });
+    }, {threshold: .35, rootMargin: "0px 0px -10% 0px"});
+    steps.forEach(function(s){ so.observe(s); });
+
+    // 6. stat cards: count up from 0 on first view (1.2s, ease-out); the real number is in the HTML
+    var nums = [].slice.call(document.querySelectorAll(".stat b")).filter(function(b){ return /^\d+$/.test(b.textContent.trim()); });
+    nums.forEach(function(b){ b.setAttribute("data-final", b.textContent.trim()); b.textContent = "0"; });
+    var co = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        co.unobserve(e.target);
+        var b = e.target, end = +b.getAttribute("data-final"), t0 = performance.now();
+        (function step(t){ var p = Math.max(0, Math.min(1, (t - t0) / 1200)); b.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); })(t0);
+      });
+    }, {threshold: .4});
+    nums.forEach(function(b){ co.observe(b); });
   } else {
-    document.querySelectorAll("#steps .step").forEach(function(s){ s.classList.add("on"); });
+    steps.forEach(function(s, i){ s.classList.add("on"); if (i > 0) steps[i - 1].classList.add("filled"); });
   }
 
   // architecture explorer
@@ -519,6 +605,56 @@
     g.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); show(k); } });
   });
   show("a");
+
+  // 9. ARCHITECTURE: highlight a node's links, dim the rest, speed up its packets, show a tooltip.
+  //    Mouse hover and keyboard focus show it; on touch a tap toggles it and a tap outside closes it.
+  var diagram = document.querySelector(".diagram"), tip = document.getElementById("tip");
+  var linkEls = [].slice.call(document.querySelectorAll(".link[data-ends]"));
+  var pktEls = [].slice.call(document.querySelectorAll(".pkt[data-ends]"));
+  var nodeEls = [].slice.call(document.querySelectorAll(".node"));
+  var activeNode = null, lastPointer = "mouse";
+  function endsOf(el){ return el.getAttribute("data-ends").split(" "); }
+  function showTip(g, k){
+    var n = NODES[k]; if (!tip || !diagram) return;
+    tip.innerHTML = "<b>" + n.t + "</b><span>Hardware: " + esc(n.d) + "</span><span>Role: " + esc(n.r) + "</span>";
+    var d = diagram.getBoundingClientRect(), r = g.getBoundingClientRect();
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var x = Math.max(8, Math.min(r.left - d.left + r.width / 2 - w / 2, d.width - w - 8));
+    var y = r.bottom - d.top + 10; if (y + h > d.height) y = r.top - d.top - h - 10;
+    tip.style.setProperty("--tx", x + "px"); tip.style.setProperty("--ty", Math.max(4, y) + "px");
+    tip.classList.add("show");
+    g.setAttribute("aria-describedby", "tip");
+  }
+  function focusNode(g){
+    var k = g.getAttribute("data-node"), near = {}; near[k] = 1; activeNode = g;
+    linkEls.forEach(function(l){ var e = endsOf(l), rel = e.indexOf(k) > -1; l.classList.toggle("dim", !rel); if (rel) { near[e[0]] = 1; near[e[1]] = 1; } });
+    pktEls.forEach(function(p){
+      var rel = endsOf(p).indexOf(k) > -1, base = parseFloat(p.getAttribute("data-dur"));
+      p.classList.toggle("dim", !rel);
+      p.querySelector("animateMotion").setAttribute("dur", (rel ? base * .45 : base) + "s");      // its packets speed up
+    });
+    nodeEls.forEach(function(n){ n.classList.toggle("dim", !near[n.getAttribute("data-node")]); });
+    showTip(g, k);
+  }
+  function clearFocus(){
+    if (!activeNode) return;
+    activeNode.removeAttribute("aria-describedby"); activeNode = null;
+    linkEls.concat(pktEls, nodeEls).forEach(function(el){ el.classList.remove("dim"); });
+    pktEls.forEach(function(p){ p.querySelector("animateMotion").setAttribute("dur", p.getAttribute("data-dur") + "s"); });
+    if (tip) tip.classList.remove("show");
+  }
+  {
+    nodeEls.forEach(function(g){
+      g.addEventListener("pointerdown", function(e){ lastPointer = e.pointerType; });
+      g.addEventListener("pointerenter", function(e){ if (e.pointerType === "mouse") focusNode(g); });
+      g.addEventListener("pointerleave", function(e){ if (e.pointerType === "mouse") clearFocus(); });
+      g.addEventListener("focus", function(){ focusNode(g); });
+      g.addEventListener("blur", function(){ clearFocus(); });
+      g.addEventListener("click", function(){ if (lastPointer !== "mouse") { activeNode === g ? clearFocus() : focusNode(g); } });
+    });
+    document.addEventListener("pointerdown", function(e){ if (!e.target.closest(".node, .tip")) clearFocus(); });
+  }
+
 
   // lightbox
   var shots = Array.prototype.slice.call(document.querySelectorAll(".shot"));
