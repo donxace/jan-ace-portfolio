@@ -1,21 +1,34 @@
+<!doctype html>
+<html lang="en">
 <meta charset="UTF-8">
-<title>Jan Ace Lazo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Jan Ace Lazo is a network engineer (BS Computer Engineering, PUP) who designs networks that stay up, stay secure, and scale. Entry-level, open to work. CCNA, JNCIA-Junos and ISC2 CC certified.">
+<meta name="theme-color" content="#F2F1F3">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jan Ace Lazo | Network Engineer (BS Computer Engineering)">
+<meta property="og:description" content="I design networks that stay up, stay secure, and scale. CCNA, JNCIA-Junos and ISC2 CC certified; 26-campus WAN design with 138 devices.">
+<meta property="og:image" content="https://donxace.github.io/jan-ace-portfolio/og-image.png">
+<meta property="og:url" content="https://donxace.github.io/jan-ace-portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<title>Jan Ace Lazo | Network Engineer (BS Computer Engineering)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F2F1F3;
     --surface:#E9E6E8;
     --surface-2:#DEDADD;
     --ink:#1B1719;
-    --ink-dim:#4A4246;
+    --ink-dim:#5F575B;
     --accent:#7B1E2C;
     --accent-ink:#ffffff;
     --ease:cubic-bezier(.22,.85,.32,1);
     --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
     --display:'Archivo','Arial Narrow',system-ui,sans-serif;
     --radius:0;
+    --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
     --gap-section:clamp(88px,12vw,168px);
     color-scheme:light;
   }
@@ -32,7 +45,7 @@
     line-height:1.55;
   }
 
-  ::selection{background:var(--accent);color:#fff;}
+  ::selection{background:var(--accent);color:var(--accent-ink);}
   a{color:inherit;}
   button{font:inherit;color:inherit;}
   img{max-width:100%;}
@@ -129,43 +142,72 @@
 
   /* ---------- hero ---------- */
 
-  .hero{padding-block:clamp(40px,6vw,88px) var(--gap-section);}
-
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    align-items:end;
-    gap:clamp(32px,5vw,80px);
-  }
-  @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr;}
-    .hero-photo-col{order:-1;}
+  .hero{
+    --h-bg:var(--bg);
+    --h-red:var(--accent);
+    position:relative;
+    overflow:hidden;
+    background:var(--h-bg);
+    color:var(--h-red);
+    padding-block:clamp(28px,4vw,56px) 0;
   }
 
-  .hero-copy{display:flex;flex-direction:column;align-items:flex-start;}
 
-  .hero-copy h1{
-    font-size:clamp(44px,7.4vw,112px);
-    line-height:.95;
-    letter-spacing:-.03em;
-  }
+  .hero-stage{position:relative;min-height:min(56vw,760px);min-width:0;}
 
-  .hero-role{
-    margin-top:28px;
+  .hero h1{
+    position:relative;z-index:1;
+    display:flex;flex-direction:column;
     font-family:var(--display);
-    font-weight:600;
-    font-size:clamp(18px,2vw,22px);
-    color:var(--ink);
+    font-stretch:125%;
+    font-weight:800;
+    font-size:clamp(38px,12.6vw,176px);
+    line-height:.86;
+    letter-spacing:-.045em;
+    text-transform:uppercase;
+    color:var(--h-red);
+    text-wrap:nowrap;
   }
 
-  .hero-desc{
-    margin-top:12px;
-    max-width:52ch;
-    color:var(--ink-dim);
-    font-size:18px;
+  .hero-cutout{
+    position:absolute;z-index:2;
+    left:50%;bottom:0;
+    transform:translateX(-50%);
+    height:70%;width:auto;aspect-ratio:1;
+    display:block;
   }
 
-  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;}
+  .hero-side{
+    position:absolute;z-index:3;
+    bottom:clamp(24px,4vw,56px);
+    width:min(27%,380px);
+    display:flex;flex-direction:column;gap:20px;
+  }
+  .hero-side-l{left:32px;align-items:flex-start;}
+  .hero-side-r{right:32px;align-items:flex-end;text-align:right;}
+
+  .hero-id b{display:block;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:clamp(17px,1.7vw,24px);line-height:1.2;}
+  .hero-id span{display:block;font-size:clamp(17px,1.7vw,24px);font-weight:300;line-height:1.25;}
+
+  .hero-side p{font-size:clamp(15px,1.25vw,18px);line-height:1.5;color:var(--h-red);}
+
+  .hero .btn-primary{background:var(--h-red);color:var(--h-bg);}
+  .hero .btn-primary:hover{background:var(--ink);}
+  .hero .btn:focus-visible{outline-color:var(--h-red);}
+
+  @media (max-width:860px){
+    .hero{padding-bottom:0;}
+    .hero-stage{min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:24px;}
+    .hero h1{grid-column:1/-1;font-size:11.6vw;}
+    .hero-cutout{position:relative;left:auto;bottom:auto;transform:none;grid-column:1/-1;grid-row:2;justify-self:center;height:auto;width:min(80%,420px);margin-top:-6%;}
+    .hero-side{position:static;width:auto;grid-row:3;padding-bottom:40px;}
+    .hero-side-r{align-items:flex-start;text-align:left;}
+  }
+  @media (max-width:560px){
+    .hero-stage{grid-template-columns:1fr;}
+    .hero-side-r{grid-row:4;padding-bottom:48px;}
+    .hero-side-l{padding-bottom:0;}
+  }
 
   .btn{
     display:inline-flex;align-items:center;
@@ -183,32 +225,6 @@
   .btn-ghost{background:var(--surface);color:var(--ink);}
   .btn-ghost:hover{background:var(--surface-2);}
 
-  .hero-stats{
-    display:flex;flex-wrap:wrap;
-    gap:16px 48px;
-    margin-top:56px;
-  }
-  .hero-stat b{
-    display:block;
-    font-family:var(--display);
-    font-stretch:78%;
-    font-size:40px;
-    line-height:1;
-    letter-spacing:-.02em;
-    font-variant-numeric:tabular-nums;
-  }
-  .hero-stat span{display:block;margin-top:6px;font-size:15px;color:var(--ink-dim);}
-
-  .hero-photo-col{position:relative;}
-  .hero-photo-frame{position:relative;overflow:hidden;background:var(--surface);aspect-ratio:4/5;}
-  .hero-photo-frame img{
-    width:100%;height:100%;
-    object-fit:cover;object-position:center top;
-    display:block;
-    transition:transform .8s var(--ease);
-  }
-  .hero-photo-frame:hover img{transform:scale(1.03);}
-
   /* ---------- sections ---------- */
 
   section{padding-bottom:var(--gap-section);}
@@ -224,6 +240,7 @@
   .section-split .section-head{margin:0;}
   @media (max-width:860px){.section-split{grid-template-columns:1fr;}.section-split .section-head{margin-bottom:28px;}}
 
+
   /* about */
 
   .notes{display:flex;flex-direction:column;gap:24px;margin:0;padding:0;max-width:62ch;}
@@ -236,8 +253,8 @@
 
   .tl-item{
     display:grid;
-    grid-template-columns:minmax(0,5fr) minmax(0,7fr);
-    gap:clamp(24px,5vw,80px);
+    grid-template-columns:minmax(0,200px) minmax(0,1fr);
+    gap:clamp(24px,4vw,64px);
     padding:clamp(24px,3vw,40px);
     background:var(--surface);
   }
@@ -270,15 +287,11 @@
   /* projects */
 
   .cards{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
-  .card{grid-column:span 2;}
-  .card--media:nth-child(1){grid-column:span 6;}
-  .card--media:nth-child(2),.card--media:nth-child(3){grid-column:span 3;}
-  @media (max-width:960px){
-    .card,.card--media:nth-child(2),.card--media:nth-child(3){grid-column:span 3;}
-  }
+  .card{grid-column:span 3;}
+  .card--wide{grid-column:span 6;}
   @media (max-width:640px){
     .cards{grid-template-columns:1fr;}
-    .card,.card--media:nth-child(n){grid-column:auto;}
+    .card,.card--wide{grid-column:auto;}
   }
 
   .card{
@@ -287,14 +300,28 @@
     display:flex;flex-direction:column;gap:14px;
     transition:background .25s var(--ease);
   }
+  .card-meta{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    color:var(--ink-dim);
+    font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+    font-size:13px;
+    letter-spacing:.075em;
+    line-height:1.4;
+    text-transform:uppercase;
+  }
+  .card-meta .index{color:var(--accent);font-weight:700;}
+  .card-meta .index::after{content:" /";margin-left:4px;}
   .card h3{font-size:clamp(24px,2.4vw,32px);line-height:1.05;letter-spacing:-.02em;}
   .card p{color:var(--ink-dim);font-size:17px;max-width:62ch;}
 
   .card--media{padding:0;overflow:hidden;cursor:pointer;}
   .card--media:hover{background:var(--surface-2);}
   .card-media{margin:0;aspect-ratio:16/10;background:var(--surface-2);overflow:hidden;}
-  .card--media:nth-child(1) .card-media{aspect-ratio:21/9;}
-  @media (max-width:640px){.card--media:nth-child(1) .card-media{aspect-ratio:16/10;}}
+  .card--wide:not(.card--side) .card-media{aspect-ratio:21/9;}
+  @media (max-width:640px){.card--wide:not(.card--side) .card-media{aspect-ratio:16/10;}}
   .card-media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .8s var(--ease);}
   .card--media:hover .card-media img{transform:scale(1.03);}
   .card--media .card-body{padding:28px;display:flex;flex-direction:column;gap:14px;flex:1;}
@@ -342,7 +369,7 @@
     background:var(--surface);border:none;cursor:pointer;
     transition:background .2s var(--ease),color .2s var(--ease);
   }
-  .project-modal-close:hover{background:var(--accent);color:#fff;}
+  .project-modal-close:hover{background:var(--accent);color:var(--accent-ink);}
   .project-modal-close svg{width:16px;height:16px;}
 
   .project-modal-scroll{overflow-y:auto;flex:1;min-height:0;}
@@ -361,7 +388,7 @@
     transition:background .2s var(--ease),color .2s var(--ease);
     z-index:2;
   }
-  .pm-nav:hover{background:var(--accent);color:#fff;}
+  .pm-nav:hover{background:var(--accent);color:var(--accent-ink);}
   .pm-nav svg{width:16px;height:16px;}
   .pm-nav-prev{left:12px;}
   .pm-nav-next{right:12px;}
@@ -443,22 +470,14 @@
   .cert-name{font-weight:600;font-size:17px;}
   .cert-sub{font-size:15px;color:var(--ink-dim);}
 
-  /* skills */
-
-  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;}
-  .legend-group .label{display:block;margin-bottom:14px;font-family:var(--display);font-stretch:78%;font-weight:760;font-size:28px;line-height:1.05;letter-spacing:-.01em;}
-  .legend-tags{display:flex;flex-direction:column;gap:8px;}
-  .legend-tags span{font-size:18px;color:var(--ink-dim);transition:color .2s var(--ease),transform .25s var(--ease);}
-  .legend-tags span:hover{color:var(--accent);transform:translateX(4px);}
-
   /* footer */
 
   footer{background:var(--ink);color:var(--bg);padding-block:clamp(56px,8vw,104px) 32px;}
   .footer-name{
     display:block;
     font-family:var(--display);font-stretch:75%;font-weight:760;
-    font-size:clamp(56px,13.5vw,220px);
-    line-height:.9;letter-spacing:-.035em;
+    font-size:clamp(56px,18vw,300px);
+    line-height:.9;letter-spacing:-.02em;
     margin-bottom:clamp(32px,5vw,64px);
     white-space:nowrap;
   }
@@ -473,28 +492,174 @@
     font-size:16px;font-weight:500;cursor:pointer;
     transition:background .2s var(--ease),color .2s var(--ease),transform .2s var(--ease);
   }
-  .copy-btn:hover{background:var(--accent);color:#fff;}
+  .copy-btn:hover{background:var(--accent);color:var(--accent-ink);}
   .copy-btn:active{transform:scale(.97);}
   .copy-btn:focus-visible{outline-color:#fff;}
   .copy-btn svg{width:14px;height:14px;flex:none;}
-  .copy-btn.copied{background:var(--accent);color:#fff;}
+  .copy-btn.copied{background:var(--accent);color:var(--accent-ink);}
 
   @media (prefers-reduced-motion:reduce){
     *{transition:none !important;}
     html{scroll-behavior:auto;}
+    .topo .flows path{animation:none;}
     .js .reveal{opacity:1;transform:none;}
+  }
+
+  /* ---------- v2: themes ---------- */
+
+  :root{--foot-bg:#1B1719;--foot-ink:#F2F1F3;}
+  :root[data-theme="dark"]{
+    --bg:#151113;
+    --surface:#201A1D;
+    --surface-2:#2D2428;
+    --ink:#F3EEF0;
+    --ink-dim:#B8ADB2;
+    --accent:#E58A98;
+    --accent-ink:#1B1719;
+    --foot-bg:#0D0A0B;
+    --foot-ink:#F3EEF0;
+    color-scheme:dark;
+  }
+  .tl-proof:hover{background:var(--surface-2);}
+  .pm-slide-caption{background:var(--ink);color:var(--bg);}
+  .cert-badge{background:#fff;}
+  footer{background:var(--foot-bg);color:var(--foot-ink);}
+
+  /* ---------- v2: nav as a network path ---------- */
+
+  .nav-actions{display:flex;align-items:center;gap:8px;}
+  .theme-btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;background:var(--surface);cursor:pointer;transition:background .2s var(--ease);}
+  .theme-btn:hover{background:var(--surface-2);}
+  .theme-btn svg{width:20px;height:20px;}
+  .theme-btn .i-sun{display:none;}
+  :root[data-theme="dark"] .theme-btn .i-sun{display:block;}
+  :root[data-theme="dark"] .theme-btn .i-moon{display:none;}
+
+  .navlinks{gap:20px;}
+  .navlinks a:not(.cta-link){display:inline-flex;align-items:center;gap:8px;position:relative;padding:6px 0;background:none;}
+  .navlinks a:not(.cta-link)::before{content:"";width:9px;height:9px;flex:none;border-radius:50%;border:2px solid var(--ink-dim);transition:background .25s var(--ease),border-color .25s var(--ease);}
+  .navlinks a:not(.cta-link)::after{content:"";position:absolute;right:-17px;top:50%;width:14px;height:2px;background:var(--surface-2);}
+  .navlinks a.passed::before{background:var(--ink-dim);}
+  .navlinks a.current{color:var(--ink);font-weight:600;}
+  .navlinks a.current::before{background:var(--accent);border-color:var(--accent);}
+  .navlinks a:hover{color:var(--ink);}
+  @media (max-width:760px){
+    .navlinks a:not(.cta-link)::after{display:none;}
+    .navlinks a:not(.cta-link){padding:14px 0;}
+  }
+
+  /* ---------- v2: hero ---------- */
+
+  .hero-net{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+  .hero-net .l{stroke:var(--surface-2);stroke-width:1.5;fill:none;}
+  .hero-net .n{fill:var(--bg);stroke:var(--ink-dim);stroke-width:1.5;opacity:.45;}
+  .hero-net .pkt{fill:var(--accent);}
+  .hero-stage{z-index:1;}
+  .hero-id b.name{font-size:clamp(24px,2.6vw,36px);line-height:1.1;}
+  .hero .hero-value{font-family:var(--display);font-stretch:90%;font-weight:600;font-size:clamp(20px,1.9vw,27px);line-height:1.2;color:var(--ink);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;}
+  .hero .btn-primary{background:var(--accent);color:var(--accent-ink);}
+  .hero .btn-primary:hover{background:var(--ink);color:var(--bg);}
+  .hero .btn-ghost{background:var(--surface);color:var(--ink);}
+  .hero .btn-ghost:hover{background:var(--surface-2);}
+  .hero-side p{color:var(--accent);}
+  .hero-id b,.hero-id span{color:var(--accent);}
+  .hero h1{color:var(--accent);}
+  .hero-side-l{width:min(26%,360px);}
+  :root[data-theme="dark"] .hero-side p,:root[data-theme="dark"] .hero-id b,:root[data-theme="dark"] .hero-id span{color:var(--ink);}
+  @media (max-width:860px){.hero-side-l{width:auto;}}
+
+  /* ---------- v2: monitoring cards ---------- */
+
+  .stats{padding-block:clamp(40px,5vw,64px) var(--gap-section);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+  @media (max-width:860px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .stat{background:var(--surface);padding:24px;display:flex;flex-direction:column;gap:8px;}
+  .stat-status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:500;color:var(--accent);}
+  .stat-status i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{50%{opacity:.3;}}
+  .stat b{font-family:var(--display);font-stretch:78%;font-weight:760;font-size:clamp(52px,5.4vw,76px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .stat .lbl{color:var(--ink-dim);font-size:16px;line-height:1.35;}
+
+  /* ---------- v2: about + terminal ---------- */
+
+  .about-meta{margin-top:20px;color:var(--ink-dim);font-size:16px;}
+  .term{margin-top:32px;background:var(--surface);padding:20px 24px;border-left:3px solid var(--accent);max-width:640px;}
+  .term pre{margin:0;font-family:var(--mono);font-size:clamp(13px,1.25vw,15px);line-height:1.75;white-space:pre-wrap;color:var(--ink);min-height:12.5em;}
+  .term .cmd{color:var(--ink-dim);}
+  .term .ok{color:var(--accent);font-weight:600;}
+
+  /* ---------- v2: skills ---------- */
+
+  .skill-note{color:var(--ink-dim);font-size:16px;margin:-20px 0 36px;max-width:72ch;}
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px;}
+  .skill-group h3{font-size:26px;line-height:1.05;margin-bottom:14px;}
+  .skill-group ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-group li{display:inline-flex;align-items:center;gap:8px;background:var(--surface);padding:8px 13px;font-size:16px;}
+  .skill-group li::before{content:"";width:8px;height:8px;flex:none;border-radius:50%;background:var(--accent);}
+  .skill-group li.fam::before{background:none;box-shadow:inset 0 0 0 2px var(--accent);}
+
+  /* ---------- v2: projects and certificates ---------- */
+
+  .card{position:relative;}
+  .card::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:2;}
+  .card:hover::after,.card:focus-visible::after{transform:scaleX(1);}
+  .card p.card-result{font-family:var(--display);font-stretch:90%;font-weight:600;font-size:clamp(19px,1.7vw,24px);line-height:1.25;color:var(--ink);}
+  .cert-date{display:block;font-family:var(--mono);font-size:13px;color:var(--accent);margin-top:4px;}
+
+  /* ---------- v2: contact + footer ---------- */
+
+  #contact{padding-bottom:var(--gap-section);}
+  .contact-lead{font-family:var(--display);font-stretch:85%;font-weight:560;font-size:clamp(26px,2.8vw,38px);line-height:1.2;max-width:24ch;}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+  .contact-links{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:12px;}
+  .contact-links a{display:inline-flex;align-items:center;padding:14px 20px;background:var(--surface);color:var(--ink);text-decoration:none;font-weight:500;font-size:16px;transition:background .2s var(--ease),color .2s var(--ease);}
+  .contact-links a:hover{background:var(--accent);color:var(--accent-ink);}
+  .copy-btn{background:var(--surface);color:var(--ink);}
+  .copy-btn:hover,.copy-btn.copied{background:var(--accent);color:var(--accent-ink);}
+  .copy-btn:focus-visible{outline-color:var(--accent);}
+
+  @media (prefers-reduced-motion:reduce){
+    .hero-net .pkt{display:none;}
+    .stat-status i{animation:none;}
+  }
+
+  /* ---------- v3: recruiter pass ---------- */
+
+  .hero-pic{display:contents;}
+  .hero-pic.is-dark{display:none;}
+  :root[data-theme="dark"] .hero-pic.is-light{display:none;}
+  :root[data-theme="dark"] .hero-pic.is-dark{display:contents;}
+  .hero .hero-side p.hero-reach{font-size:clamp(15px,1.25vw,18px);font-weight:600;}
+  .hero-reach a{color:inherit;text-underline-offset:4px;}
+  .hero-reach a:hover{text-decoration-thickness:2px;}
+
+  /* ---------- v4: kiosk card ---------- */
+
+  .card--side{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);}
+  .card--side .card-media{aspect-ratio:auto;min-height:460px;position:relative;background:#DCE1E7;}
+  .card--side .card-media img{object-fit:contain;object-position:center;position:absolute;inset:0;}
+  .media-tag{position:absolute;left:12px;bottom:12px;z-index:1;background:var(--bg);color:var(--ink);font-size:13px;font-weight:600;padding:5px 10px;}
+  .card--side-wide{grid-template-columns:minmax(0,7fr) minmax(0,5fr);}
+  .card--side-wide .card-media{background:#F2F1F3;}
+  .card--side-wide .card-media img{object-fit:contain;}
+  @media (max-width:860px){
+    .card--side-wide{grid-template-columns:1fr;}
+    .card--side-wide .card-media{aspect-ratio:4/3;max-height:none;}
+    .card--side{grid-template-columns:1fr;}
+    .card--side .card-media{aspect-ratio:4/5;min-height:0;max-height:560px;}
   }
 </style>
 
-<nav class="topnav">
+<nav class="topnav" aria-label="Primary">
   <div class="wrap topnav-inner">
     <a href="#top" class="brand">Jan Ace Lazo</a>
     <div class="navlinks" id="nav-links">
       <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#specifications">Specifications</a>
       <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#experience">Experience</a>
       <a href="#contact" class="cta-link">Contact</a>
       <div class="auth" id="auth" hidden>
         <div id="g-signin"></div>
@@ -505,51 +670,298 @@
         </div>
       </div>
     </div>
-    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
-        <path d="M3 6h14M3 10h14M3 14h14"/>
-      </svg>
-      <span class="sr-only">Menu</span>
-    </button>
+    <div class="nav-actions">
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch color theme">
+        <svg class="i-moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 11.5A6.5 6.5 0 0 1 8.5 3.5a6.5 6.5 0 1 0 8 8Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.3 4.3l1.4 1.4M14.3 14.3l1.4 1.4M4.3 15.7l1.4-1.4M14.3 5.7l1.4-1.4"/></svg>
+      </button>
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 6h14M3 10h14M3 14h14"/>
+        </svg>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <div id="top"></div>
 
 <header class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <h1>Building real systems, not just demos.</h1>
-      <p class="hero-role">Jan Ace Lazo &middot; Computer Engineering Student, PUP &middot; Open to internships</p>
-      <p class="hero-desc">I work across networking, embedded hardware, and software &mdash; and use AI prompt engineering as a working instrument in every one of those, not as a shortcut around understanding them.</p>
+  <svg class="hero-net" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <path class="l" d="M110 120L330 60"/>
+    <path class="l" d="M330 60L520 210"/>
+    <path class="l" d="M520 210L250 330"/>
+    <path class="l" d="M250 330L40 420"/>
+    <path class="l" d="M110 120L250 330"/>
+    <path class="l" d="M900 90L1120 170"/>
+    <path class="l" d="M1120 170L1330 90"/>
+    <path class="l" d="M1120 170L1000 330"/>
+    <path class="l" d="M1000 330L1250 360"/>
+    <path class="l" d="M900 90L1000 330"/>
+    <path class="l" d="M520 210L900 90"/>
+    <circle class="n" cx="110" cy="120" r="7"/>
+    <circle class="n" cx="330" cy="60" r="7"/>
+    <circle class="n" cx="520" cy="210" r="7"/>
+    <circle class="n" cx="250" cy="330" r="7"/>
+    <circle class="n" cx="40" cy="420" r="7"/>
+    <circle class="n" cx="900" cy="90" r="7"/>
+    <circle class="n" cx="1120" cy="170" r="7"/>
+    <circle class="n" cx="1330" cy="90" r="7"/>
+    <circle class="n" cx="1000" cy="330" r="7"/>
+    <circle class="n" cx="1250" cy="360" r="7"/>
+    <circle class="pkt" r="3.5"><animateMotion dur="4.0s" begin="0.0s" repeatCount="indefinite" path="M110 120L330 60"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="5.5s" begin="0.7s" repeatCount="indefinite" path="M330 60L520 210"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="7.0s" begin="1.4s" repeatCount="indefinite" path="M520 210L900 90"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="4.0s" begin="2.1s" repeatCount="indefinite" path="M900 90L1120 170"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="5.5s" begin="2.8s" repeatCount="indefinite" path="M1120 170L1000 330"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="7.0s" begin="3.5s" repeatCount="indefinite" path="M1000 330L1250 360"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="4.0s" begin="4.2s" repeatCount="indefinite" path="M1120 170L1330 90"/></circle>
+    <circle class="pkt" r="3.5"><animateMotion dur="5.5s" begin="4.9s" repeatCount="indefinite" path="M520 210L250 330"/></circle>
+  </svg>
+  <div class="wrap hero-stage">
+    <h1><span>Network</span><span>Engineer</span></h1>
+    <picture class="hero-pic is-light"><source srcset="portrait-cutout.webp" type="image/webp"><img class="hero-cutout" src="portrait-cutout.png" alt="Portrait of Jan Ace Lazo" width="900" height="900" fetchpriority="high"></picture>
+    <picture class="hero-pic is-dark"><source srcset="portrait-cutout-dark.webp" type="image/webp"><img class="hero-cutout" src="portrait-cutout-dark.png" alt="" width="900" height="900" aria-hidden="true" loading="lazy"></picture>
+
+    <div class="hero-side hero-side-l">
+      <div class="hero-id"><b class="name">Jan Ace Lazo</b><span>BS Computer Engineering, PUP</span></div>
+      <p class="hero-value">I design networks that stay up, stay secure, and scale.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View projects</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        <a href="JanAceLazo_NetworkEngineer_Resume.pdf" class="btn btn-primary" download>Download Resume (PDF)</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><b>1.48</b><span>GWA</span></div>
-        <div class="hero-stat"><b>8</b><span>Certifications</span></div>
-        <div class="hero-stat"><b>3</b><span>Featured projects</span></div>
-      </div>
+      <p class="hero-reach"><a href="mailto:acelazo617@gmail.com">acelazo617@gmail.com</a></p>
     </div>
 
-    <div class="hero-photo-col">
-      <div class="hero-photo-frame">
-        <img src="portrait-1x1.png" alt="Portrait of Jan Ace Lazo" width="1080" height="1080">
-      </div>
+    <div class="hero-side hero-side-r">
+      <div class="hero-id"><b>Open to work</b><span>Entry-level &amp; internships</span></div>
+      <p>CCNA, JNCIA-Junos and ISC2 CC certified. Hands-on with OSPF, BGP, VLANs, ACLs and GRE over IPsec. Designed a 26-campus WAN: 138 devices, 72 ready-to-paste configurations.</p>
     </div>
   </div>
 </header>
 
-<main>
+<section class="stats" aria-label="At a glance">
+  <div class="wrap stats-grid">
+    <div class="stat"><span class="stat-status"><i aria-hidden="true"></i>UP</span><b>26</b><span class="lbl">campuses connected in my PUP&ndash;Donx WAN design</span></div>
+    <div class="stat"><span class="stat-status"><i aria-hidden="true"></i>UP</span><b>138</b><span class="lbl">devices designed and configured in that network</span></div>
+    <div class="stat"><span class="stat-status"><i aria-hidden="true"></i>UP</span><b>72</b><span class="lbl">ready-to-paste device configurations written</span></div>
+    <div class="stat"><span class="stat-status"><i aria-hidden="true"></i>UP</span><b>7</b><span class="lbl">industry certifications and course credentials</span></div>
+  </div>
+</section>
+
+<main id="main-content">
   <section id="about">
     <div class="wrap section-split">
       <div class="section-head"><h2>About</h2></div>
-      <ul class="notes">
-        <li>Third-year Computer Engineering student at Polytechnic University of the Philippines, carrying a 1.48 GWA (1.00 is the top mark on PUP&rsquo;s scale).</li>
-        <li>Builds and automates real infrastructure &mdash; enterprise networks, embedded hardware, custom PCBs &mdash; and treats AI prompt engineering as a working instrument across every project and role below, not an add-on.</li>
-        <li>Holds networking and security credentials (CCNA, Juniper Junos, ISC2 CC) alongside hands-on QA, hardware fabrication, and digital-marketing experience.</li>
-      </ul>
+      <div>
+        <ul class="notes">
+          <li>I&rsquo;m a third-year Computer Engineering student at the Polytechnic University of the Philippines (GWA 1.48) who designs and configures networks, and builds the embedded hardware that connects to them.</li>
+          <li>I like problems where reliability matters: redundant links, clean addressing, and security built in from the start rather than bolted on afterward.</li>
+          <li>I&rsquo;m looking for [an internship / junior network engineer role] where I can design, configure, and troubleshoot real networks.</li>
+        </ul>
+        <p class="about-meta">Based in [city] &middot; [on-site / remote / hybrid] &middot; available from [start date]</p>
+        <div class="term" id="term" role="img" aria-label="Terminal summary: Jan Ace Lazo, status up, protocol up, role network engineer, open to work yes">
+          <pre aria-hidden="true"><code id="term-out"><span class="cmd">R1# show interfaces status</span>
+Name:          Jan Ace Lazo
+Status:        <span class="ok">up</span>
+Protocol:      <span class="ok">up</span>
+Role:          Network Engineer
+Certs:         CCNA, JNCIA-Junos, ISC2 CC
+Open to work:  <span class="ok">yes</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head"><h2>Skills</h2></div>
+      <p class="skill-note">Filled dot = hands-on (built or configured in a project). Hollow dot = familiar (studied or lab-level). [Confirm these levels before publishing.]</p>
+      <div class="skill-groups">
+        <div class="skill-group"><h3>Routing</h3><ul><li>OSPF<span class="sr-only"> (hands-on)</span></li><li>BGP<span class="sr-only"> (hands-on)</span></li><li>Static routing<span class="sr-only"> (hands-on)</span></li><li class="fam">EIGRP<span class="sr-only"> (familiar)</span></li></ul></div>
+        <div class="skill-group"><h3>Switching</h3><ul><li>VLANs<span class="sr-only"> (hands-on)</span></li><li>Inter-VLAN routing<span class="sr-only"> (hands-on)</span></li><li class="fam">STP<span class="sr-only"> (familiar)</span></li><li class="fam">EtherChannel<span class="sr-only"> (familiar)</span></li></ul></div>
+        <div class="skill-group"><h3>Services</h3><ul><li>ACLs<span class="sr-only"> (hands-on)</span></li><li>NAT / PAT<span class="sr-only"> (hands-on)</span></li><li class="fam">DHCP<span class="sr-only"> (familiar)</span></li><li class="fam">DNS<span class="sr-only"> (familiar)</span></li></ul></div>
+        <div class="skill-group"><h3>Security</h3><ul><li>Firewalls (Cisco ASA)<span class="sr-only"> (hands-on)</span></li><li>VPN (GRE over IPsec)<span class="sr-only"> (hands-on)</span></li><li class="fam">Port security<span class="sr-only"> (familiar)</span></li></ul></div>
+        <div class="skill-group"><h3>Tools</h3><ul><li>Cisco Packet Tracer<span class="sr-only"> (hands-on)</span></li><li>Ansible<span class="sr-only"> (hands-on)</span></li><li class="fam">GNS3<span class="sr-only"> (familiar)</span></li><li class="fam">Wireshark<span class="sr-only"> (familiar)</span></li><li class="fam">Network troubleshooting<span class="sr-only"> (familiar)</span></li></ul></div>
+        <div class="skill-group"><h3>Hardware / IoT</h3><ul><li>ESP32<span class="sr-only"> (hands-on)</span></li><li>Arduino<span class="sr-only"> (hands-on)</span></li><li>Sensors<span class="sr-only"> (hands-on)</span></li><li>Embedded systems<span class="sr-only"> (hands-on)</span></li><li>PCB design &amp; fab<span class="sr-only"> (hands-on)</span></li></ul></div>
+        <div class="skill-group"><h3>AI &amp; Automation</h3><ul><li>Prompt engineering<span class="sr-only"> (hands-on)</span></li><li>AI-assisted development<span class="sr-only"> (hands-on)</span></li><li>Automation scripting<span class="sr-only"> (hands-on)</span></li></ul></div>
+        <div class="skill-group"><h3>Content &amp; Growth</h3><ul><li>AI content creation<span class="sr-only"> (hands-on)</span></li><li>Content strategy<span class="sr-only"> (hands-on)</span></li><li>Marketing automation<span class="sr-only"> (hands-on)</span></li><li>Social media management<span class="sr-only"> (hands-on)</span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head"><h2>Projects</h2></div>
+      <div class="cards">
+        <article class="card card--media card--wide card--side card--side-wide" data-project="pupdonx" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="card-media"><img src="pup-donx-wan-map.png" alt="Network topology map of the PUP-Donx WAN: all 26 PUP campuses on a map of Luzon and Mindoro wired to their Donx points of presence, with insets for Metro Manila and the Sta. Mesa main campus, and the internet transit link" width="1392" height="1040" loading="lazy"><span class="media-tag">Network topology &middot; 26 campuses</span></div>
+          <div class="card-body">
+            <div class="card-meta"><span class="index">01</span><span>Campus WAN / 26 sites</span></div>
+            <h3>PUP&ndash;Donx Campus WAN</h3>
+<p class="card-result">A network design that connects all 26 PUP campuses and keeps working if a link or router fails.</p>
+            <p>Enterprise WAN design connecting all 26 PUP campuses through Donx, a fictional regional ISP: dual-homed eBGP edge, GRE over IPsec overlay with two hubs, one OSPF area per campus, and a firewalled DMZ &mdash; 138 devices and 72 ready-to-paste configurations built in Cisco Packet Tracer.</p>
+            <div class="tagrow">
+              <span class="tag">BGP</span>
+              <span class="tag">OSPF</span>
+              <span class="tag">GRE/IPsec</span>
+              <span class="tag">Cisco ASA</span>
+              <span class="tag">Packet Tracer</span>
+            </div>
+            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
+          </div>
+        </article>
+
+        <article class="card card--media card--wide card--side" data-project="vitalyze" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="card-media"><img src="vitalyze-kiosk.webp" alt="3D design render of the Vitalyze kiosk: a tall marble-white column with the Vitalyze logo, a body-temperature sensor, a screen, and a weighing platform at the base" width="900" height="1228" loading="lazy"><span class="media-tag">3D design render &middot; not yet built</span></div>
+          <div class="card-body">
+            <div class="card-meta"><span class="index">02</span><span>Embedded health systems</span></div>
+            <h3>Vitalyze-Form &mdash; Vital Signs Kiosk</h3>
+<p class="card-result">A self-service kiosk design that measures a person&rsquo;s vital signs and sends them to a live admin dashboard.</p>
+            <p>Full-stack kiosk system for unattended vital-signs collection: ESP32 sensor stations (RFID check-in, pulse oximeter, IR thermometer, height/weight) reporting live heartbeats to a NestJS/TypeORM backend, with a React admin dashboard for device status, patient records, and OCR-assisted data entry.</p>
+            <div class="tagrow">
+              <span class="tag">React</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">TypeORM/MySQL</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">OCR</span>
+            </div>
+            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
+          </div>
+        </article>
+
+        <article class="card card--media" data-project="pnpitms" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="card-media"><img src="pnp-itms.png" alt="PNP ITMS Department landing page with a chooser listing BMI System, Intrusion Detection, Environment Monitoring, Hardware Inventory, and PC Information System" loading="lazy"></div>
+          <div class="card-body">
+            <div class="card-meta"><span class="index">03</span><span>Public-sector operations / 5 systems</span></div>
+            <h3>PNP ITMS &mdash; IT Management System</h3>
+<p class="card-result">One platform that lets an IT department monitor health screening, intrusions, environment, and hardware in one place.</p>
+            <p>Multi-domain platform for the PNP ITMS Department, built on the same ESP32 + NestJS/React foundation as Vitalyze-Form: a BMI screening kiosk (QR-code check-in), intrusion detection, environment (smoke/temperature) monitoring, hardware inventory, and per-machine PC information &amp; security assessment &mdash; each behind its own role-scoped login.</p>
+            <div class="tagrow">
+              <span class="tag">React</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">TypeORM/MySQL</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">QR Codes</span>
+            </div>
+            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-meta"><span class="index">04</span><span>Network automation</span></div>
+          <h3>Multi-Campus Network Automation</h3>
+<p class="card-result">Cut repetitive network setup work by more than 60%.</p>
+          <p>Ansible-based automation for device configuration, VLAN provisioning, routing deployment, and validation across multiple campuses &mdash; cut repetitive manual work 60%+. AI prompt engineering generated, optimized, and debugged the playbooks, lifting development efficiency 50%+.</p>
+          <div class="tagrow">
+            <span class="tag">Ansible</span>
+            <span class="tag">VLANs</span>
+            <span class="tag">Routing</span>
+            <span class="tag">Prompt Engineering</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-meta"><span class="index">05</span><span>Embedded / Arduino + PCB</span></div>
+          <h3>Heart Rate Monitoring System</h3>
+<p class="card-result">A heart-rate monitor I built from firmware to circuit board to phone app.</p>
+          <p>End-to-end Arduino heart-rate monitor: embedded firmware, a custom-fabricated PCB, and a companion mobile app for real-time visualization and local logging. AI-assisted prompt engineering ran through code generation, debugging, and optimization &mdash; cutting development time 50%+.</p>
+          <div class="tagrow">
+            <span class="tag">Arduino</span>
+            <span class="tag">PCB Design &amp; Fab</span>
+            <span class="tag">Mobile App</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-meta"><span class="index">06</span><span>Production / print systems</span></div>
+          <h3>Print Production &amp; Layout</h3>
+<p class="card-result">Kept 500+ receipt booklets a month moving through production.</p>
+          <p>Produced 500+ receipt booklets a month (25,000+ pages), building and modifying print layouts for business forms and custom documents, plus routine printer maintenance and troubleshooting to keep production moving.</p>
+          <div class="tagrow">
+            <span class="tag">Print Layout</span>
+            <span class="tag">QC</span>
+            <span class="tag">Equipment Upkeep</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="wrap">
+      <div class="section-head"><h2>Certifications &amp; Education</h2></div>
+      <div class="specs">
+        <div>
+          <div class="gwa-card">
+            <span class="num">1.48</span>
+            <span class="cap">GENERAL WEIGHTED AVERAGE</span>
+          </div>
+          <div class="edu-org">
+            <strong>Polytechnic University of the Philippines</strong>
+            B.S. Computer Engineering &middot; 3rd Year<br>Expected graduation: [year]
+          </div>
+        </div>
+
+        <div>
+        <div class="cert-cards">
+          <div class="cert-card" data-project="ccna" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="ccna-cert.png" alt="Cisco Certified Network Associate certificate for Jan Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <img class="cert-badge" src="ccna-badge.png" alt="" loading="lazy">
+              <div class="cert-card-text"><span class="cert-name">CCNA</span><span class="cert-sub">Cisco Certified Network&nbsp;Associate</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="jncia" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="jncia-cert.png" alt="Juniper Networks Certified Associate, Junos (JNCIA-Junos) certificate for Jan Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <img class="cert-badge" src="juniper-badge.png" alt="" loading="lazy">
+              <div class="cert-card-text"><span class="cert-name">JNCIA&#8209;Junos</span><span class="cert-sub">Juniper Networks Certified&nbsp;Associate</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="arista" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="arista-cert.png" alt="Network Automation Professional Certificate by Arista Networks, LinkedIn Learning, for Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">Network Automation Professional</span><span class="cert-sub">Arista Networks &middot; LinkedIn&nbsp;Learning</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="netops" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="netops-cert.png" alt="NetOps DevOps for Network Engineers, Automating Networks certificate, LinkedIn Learning, for Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">NetOps: Automating Networks</span><span class="cert-sub">DevOps for Network Engineers &middot; LinkedIn&nbsp;Learning</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="appkademiya" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="appkademiya-cert.png" alt="NetOps Certified Engineer (NTO-101) certificate by Appkademiya for Jan Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">NetOps Certified Engineer</span><span class="cert-sub">NTO&#8209;101 &middot; Appkademiya</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="modernai" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="modernai-cert.png" alt="Introduction to Modern AI certificate of course completion, Cisco Networking Academy, for Ace Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">Introduction to Modern AI</span><span class="cert-sub">Cisco Networking&nbsp;Academy</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+          <div class="cert-card" data-project="cc" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="cert-card-media"><img src="isc2-cc-scoresheet.png" alt="ISC2 Certified in Cybersecurity (CC) provisional pass letter, printed score sheet, for Jan Ace J Lazo" loading="lazy"></div>
+            <div class="cert-card-foot">
+              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
+              <div class="cert-card-text"><span class="cert-name">CC</span><span class="cert-sub">ISC2 Certified in&nbsp;Cybersecurity</span><span class="cert-date">[Mon YYYY]</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="certs">
+          <div class="cert"><span class="cert-name">Typing Contest Champion</span><span class="cert-sub">2025</span><span class="cert-date">[Mon YYYY]</span></div>
+        </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -589,212 +1001,34 @@
     </div>
   </section>
 
-  <section id="projects">
-    <div class="wrap">
-      <div class="section-head"><h2>Projects</h2></div>
-      <div class="cards">
-        <article class="card card--media" data-project="vitalyze" role="button" tabindex="0" aria-haspopup="dialog">
-          <div class="card-media"><img src="vitalyze-form.png" alt="Vitalyze-Form admin dashboard with assessment filters, AI-generated health insights, and status breakdown" loading="lazy"></div>
-          <div class="card-body">
-            <h3>Vitalyze-Form &mdash; Vital Signs Kiosk</h3>
-            <p>Full-stack kiosk system for unattended vital-signs collection: ESP32 sensor stations (RFID check-in, pulse oximeter, IR thermometer, height/weight) reporting live heartbeats to a NestJS/TypeORM backend, with a React admin dashboard for device status, patient records, and OCR-assisted data entry.</p>
-            <div class="tagrow">
-              <span class="tag">React</span>
-              <span class="tag">NestJS</span>
-              <span class="tag">TypeORM/MySQL</span>
-              <span class="tag">ESP32</span>
-              <span class="tag">OCR</span>
-            </div>
-            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
-          </div>
-        </article>
-
-        <article class="card card--media" data-project="pnpitms" role="button" tabindex="0" aria-haspopup="dialog">
-          <div class="card-media"><img src="pnp-itms.png" alt="PNP ITMS Department landing page with a chooser listing BMI System, Intrusion Detection, Environment Monitoring, Hardware Inventory, and PC Information System" loading="lazy"></div>
-          <div class="card-body">
-            <h3>PNP ITMS &mdash; IT Management System</h3>
-            <p>Multi-domain platform for the PNP ITMS Department, built on the same ESP32 + NestJS/React foundation as Vitalyze-Form: a BMI screening kiosk (QR-code check-in), intrusion detection, environment (smoke/temperature) monitoring, hardware inventory, and per-machine PC information &amp; security assessment &mdash; each behind its own role-scoped login.</p>
-            <div class="tagrow">
-              <span class="tag">React</span>
-              <span class="tag">NestJS</span>
-              <span class="tag">TypeORM/MySQL</span>
-              <span class="tag">ESP32</span>
-              <span class="tag">QR Codes</span>
-            </div>
-            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
-          </div>
-        </article>
-
-        <article class="card card--media" data-project="pupdonx" role="button" tabindex="0" aria-haspopup="dialog">
-          <div class="card-media"><img src="pup-donx-wan.png" alt="PUP campuses on Donx case study header with the design sheet and headline figures: 26 campuses, 138 devices, 50 encrypted GRE tunnels, 72 device configurations" loading="lazy"></div>
-          <div class="card-body">
-            <h3>PUP&ndash;Donx Campus WAN</h3>
-            <p>Enterprise WAN design connecting all 26 PUP campuses through Donx, a fictional regional ISP: dual-homed eBGP edge, GRE over IPsec overlay with two hubs, one OSPF area per campus, and a firewalled DMZ &mdash; 138 devices and 72 ready-to-paste configurations built in Cisco Packet Tracer.</p>
-            <div class="tagrow">
-              <span class="tag">BGP</span>
-              <span class="tag">OSPF</span>
-              <span class="tag">GRE/IPsec</span>
-              <span class="tag">Cisco ASA</span>
-              <span class="tag">Packet Tracer</span>
-            </div>
-            <span class="card-more">View details <span class="arrow">&rarr;</span></span>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Multi-Campus Network Automation</h3>
-          <p>Ansible-based automation for device configuration, VLAN provisioning, routing deployment, and validation across multiple campuses &mdash; cut repetitive manual work 60%+. AI prompt engineering generated, optimized, and debugged the playbooks, lifting development efficiency 50%+.</p>
-          <div class="tagrow">
-            <span class="tag">Ansible</span>
-            <span class="tag">VLANs</span>
-            <span class="tag">Routing</span>
-            <span class="tag">Prompt Engineering</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Heart Rate Monitoring System</h3>
-          <p>End-to-end Arduino heart-rate monitor: embedded firmware, a custom-fabricated PCB, and a companion mobile app for real-time visualization and local logging. AI-assisted prompt engineering ran through code generation, debugging, and optimization &mdash; cutting development time 50%+.</p>
-          <div class="tagrow">
-            <span class="tag">Arduino</span>
-            <span class="tag">PCB Design &amp; Fab</span>
-            <span class="tag">Mobile App</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Print Production &amp; Layout</h3>
-          <p>Produced 500+ receipt booklets a month (25,000+ pages), building and modifying print layouts for business forms and custom documents, plus routine printer maintenance and troubleshooting to keep production moving.</p>
-          <div class="tagrow">
-            <span class="tag">Print Layout</span>
-            <span class="tag">QC</span>
-            <span class="tag">Equipment Upkeep</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="specifications">
-    <div class="wrap">
-      <div class="section-head"><h2>Specifications</h2></div>
-      <div class="specs">
-        <div>
-          <div class="gwa-card">
-            <span class="num">1.48</span>
-            <span class="cap">GENERAL WEIGHTED AVERAGE</span>
-          </div>
-          <div class="edu-org">
-            <strong>Polytechnic University of the Philippines</strong>
-            B.S. Computer Engineering &middot; 3rd Year
-          </div>
+  <section id="contact">
+    <div class="wrap section-split">
+      <div class="section-head"><h2>Contact</h2></div>
+      <div class="contact-body">
+        <p class="contact-lead">Hiring for a network or infrastructure role? I&rsquo;d like to hear about it.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:acelazo617@gmail.com?subject=Hello%20Jan%20Ace">Email me</a>
+          <a class="btn btn-ghost" href="JanAceLazo_NetworkEngineer_Resume.pdf" download>Download Resume (PDF)</a>
         </div>
-
-        <div>
-        <div class="cert-cards">
-          <div class="cert-card" data-project="ccna" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="ccna-cert.png" alt="Cisco Certified Network Associate certificate for Jan Ace Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <img class="cert-badge" src="ccna-badge.png" alt="" loading="lazy">
-              <div class="cert-card-text"><span class="cert-name">CCNA</span><span class="cert-sub">Cisco Certified Network&nbsp;Associate</span></div>
-            </div>
-          </div>
-          <div class="cert-card" data-project="jncia" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="jncia-cert.png" alt="Juniper Networks Certified Associate, Junos (JNCIA-Junos) certificate for Jan Ace Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <img class="cert-badge" src="juniper-badge.png" alt="" loading="lazy">
-              <div class="cert-card-text"><span class="cert-name">JNCIA&#8209;Junos</span><span class="cert-sub">Juniper Networks Certified&nbsp;Associate</span></div>
-            </div>
-          </div>
-          <div class="cert-card" data-project="arista" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="arista-cert.png" alt="Network Automation Professional Certificate by Arista Networks, LinkedIn Learning, for Ace Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
-              <div class="cert-card-text"><span class="cert-name">Network Automation Professional</span><span class="cert-sub">Arista Networks &middot; LinkedIn&nbsp;Learning</span></div>
-            </div>
-          </div>
-          <div class="cert-card" data-project="netops" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="netops-cert.png" alt="NetOps DevOps for Network Engineers, Automating Networks certificate, LinkedIn Learning, for Ace Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
-              <div class="cert-card-text"><span class="cert-name">NetOps: Automating Networks</span><span class="cert-sub">DevOps for Network Engineers &middot; LinkedIn&nbsp;Learning</span></div>
-            </div>
-          </div>
-          <div class="cert-card" data-project="appkademiya" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="appkademiya-cert.png" alt="NetOps Certified Engineer (NTO-101) certificate by Appkademiya for Jan Ace Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
-              <div class="cert-card-text"><span class="cert-name">NetOps Certified Engineer</span><span class="cert-sub">NTO&#8209;101 &middot; Appkademiya</span></div>
-            </div>
-          </div>
-          <div class="cert-card" data-project="modernai" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="modernai-cert.png" alt="Introduction to Modern AI certificate of course completion, Cisco Networking Academy, for Ace Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
-              <div class="cert-card-text"><span class="cert-name">Introduction to Modern AI</span><span class="cert-sub">Cisco Networking&nbsp;Academy</span></div>
-            </div>
-          </div>
-          <div class="cert-card" data-project="cc" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="cert-card-media"><img src="isc2-cc-scoresheet.png" alt="ISC2 Certified in Cybersecurity (CC) provisional pass letter, printed score sheet, for Jan Ace J Lazo" loading="lazy"></div>
-            <div class="cert-card-foot">
-              <span class="cert-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/></svg></span>
-              <div class="cert-card-text"><span class="cert-name">CC</span><span class="cert-sub">ISC2 Certified in&nbsp;Cybersecurity</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="certs">
-          <div class="cert"><span class="cert-name">Typing Contest Champion</span><span class="cert-sub">2025</span></div>
-        </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head"><h2>Skills</h2></div>
-      <div class="legend">
-        <div class="legend-group">
-          <span class="label">AI &amp; Automation</span>
-          <div class="legend-tags">
-            <span>Prompt Engineering</span>
-            <span>AI-Assisted Development</span>
-            <span>AI Workflows</span>
-            <span>Automation Scripting</span>
-          </div>
-        </div>
-        <div class="legend-group">
-          <span class="label">Content &amp; Growth</span>
-          <div class="legend-tags">
-            <span>AI Content Creation</span>
-            <span>Content Strategy</span>
-            <span>Marketing Automation</span>
-            <span>Social Media Management</span>
-            <span>Content Optimization</span>
-          </div>
-        </div>
+        <ul class="contact-links">
+          <li><button class="copy-btn" data-copy="acelazo617@gmail.com" aria-label="Copy email address">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+            <span class="copy-label">acelazo617@gmail.com</span></button></li>
+          <li><button class="copy-btn" data-copy="09760721613" aria-label="Copy phone number">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+            <span class="copy-label">0976 072 1613</span></button></li>
+          <li><a href="https://www.linkedin.com/in/" rel="noopener">LinkedIn [add your profile URL]</a></li>
+          <li><a href="https://github.com/donxace" rel="noopener">GitHub</a></li>
+        </ul>
       </div>
     </div>
   </section>
 </main>
 
-<footer id="contact">
+<footer>
   <div class="wrap">
     <span class="footer-name" aria-hidden="true">Jan Ace Lazo</span>
-    <div class="footer-row">
-    <span class="end">&copy; 2026 Jan Ace Lazo</span>
-    <div class="contact">
-      <button class="copy-btn" data-copy="acelazo617@gmail.com" aria-label="Copy email address">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
-        <span class="copy-label">acelazo617@gmail.com</span>
-      </button>
-      <button class="copy-btn" data-copy="09760721613" aria-label="Copy phone number">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
-        <span class="copy-label">0976 072 1613</span>
-      </button>
-    </div>
-    </div>
+    <div class="footer-row"><span class="end">&copy; 2026 Jan Ace Lazo &middot; Network Engineer</span><a class="end" href="#top">Back to top</a></div>
   </div>
 </footer>
 
@@ -841,7 +1075,7 @@
   if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("js");
     var groups = [
-      ".hero-copy > *", ".hero-photo-frame", ".section-head", ".notes li",
+      ".section-head", ".notes li", ".term", ".skill-group", ".contact-body > *",
       ".tl-item", ".card", ".gwa-card", ".edu-org", ".cert-card", ".legend-group"
     ];
     var revealObs = new IntersectionObserver(function(entries){
@@ -856,6 +1090,43 @@
         revealObs.observe(el);
       });
     });
+  }
+
+
+  // light / dark toggle (remembered per browser)
+  var themeBtn = document.getElementById("theme-btn");
+  function syncThemeBtn(){
+    var dark = document.documentElement.getAttribute("data-theme") === "dark";
+    themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+  }
+  if (themeBtn) {
+    syncThemeBtn();
+    themeBtn.addEventListener("click", function(){
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      syncThemeBtn();
+    });
+  }
+
+  // the one terminal moment: type the summary once when it scrolls into view
+  var termOut = document.getElementById("term-out");
+  if (termOut && "IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var finalHtml = termOut.innerHTML;
+    var plain = termOut.textContent;
+    termOut.textContent = "";
+    var termObs = new IntersectionObserver(function(entries){
+      if (!entries[0].isIntersecting) return;
+      termObs.disconnect();
+      var i = 0;
+      (function tick(){
+        i += 4;
+        if (i >= plain.length) { termOut.innerHTML = finalHtml; return; }
+        termOut.textContent = plain.slice(0, i);
+        setTimeout(tick, 12);
+      })();
+    }, {threshold: 0.6});
+    termObs.observe(document.getElementById("term"));
   }
 
   var menuBtn = document.getElementById("menu-btn");
@@ -911,7 +1182,7 @@
     });
   });
 
-  var links = Array.prototype.slice.call(document.querySelectorAll("#nav-links a:not(.cta-link)"));
+  var links = Array.prototype.slice.call(document.querySelectorAll("#nav-links a"));
   var sections = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
 
   if ("IntersectionObserver" in window) {
@@ -922,6 +1193,7 @@
         if (entry.isIntersecting) {
           links.forEach(function(l){ l.classList.remove("current"); });
           links[idx].classList.add("current");
+          links.forEach(function(l, i){ l.classList.toggle("passed", i < idx); });
         }
       });
     }, { rootMargin: "-40% 0px -50% 0px" });
@@ -934,15 +1206,24 @@
   var PROJECT_DETAILS = {
     vitalyze: {
       title: "Vitalyze-Form — Vital Signs Kiosk",
-      image: "vitalyze-form.png",
-      alt: "Vitalyze-Form admin dashboard with assessment filters, AI-generated health insights, and status breakdown",
-      description: "Full-stack kiosk system for unattended vital-signs collection, built end to end: firmware, backend, and admin UI.",
+      image: "vitalyze-kiosk.webp",
+      alt: "3D design render of the Vitalyze kiosk: a tall marble-white column with the Vitalyze logo, a body-temperature sensor, a screen, and a weighing platform at the base",
+      description: "A self-service kiosk for unattended vital-signs collection, with the web system behind it. The kiosk hardware is fully designed (schematics, KiCad project, perfboard layouts, plywood build plan) and shown here as 3D renders; it is not built yet. The web app, with its backend and admin dashboard, is working software.",
       points: [
-        "ESP32 sensor stations for RFID check-in, pulse oximetry, IR temperature, and height/weight, each reporting a live device heartbeat.",
-        "NestJS + TypeORM/MySQL backend with role-scoped auth for the admin and patient portals.",
+        "My role — I led a team of 5. My teammates mostly wrote the papers and documentation; I handled the technical side: hardware design, firmware, backend, dashboard, and the build plan.",
+        "System design — five ESP32 boards, each owning one job: board A reads heart rate and blood oxygen (MAX30102) and the RFID card (RC522); board B reads body temperature (MLX90614); board C reads room temperature and humidity (DHT22) and smoke (MQ-2) and drives the ventilation fans; board D, an ESP32-C3 in the height pod, measures height with an ultrasonic sensor; board E reads weight from a load cell (HX711). [Confirm: how the boards report to the backend.]",
+        "Power and protection — one AC adapter feeds a fused branch per board, each with its own regulator, reverse-polarity and surge protection, and a 5 V monitor on every board; the design includes a bench-test plan with pass/fail numbers.",
+        "NestJS + TypeORM/MySQL backend with role-scoped auth for the admin and patient portals, and a live device heartbeat from each station.",
         "A rule-based Health Insights engine on the dashboard that flags out-of-range or implausible readings per assessment.",
         "OCR-assisted intake for scanned records, PDF report export, and a device-status page for the whole kiosk fleet."
       ],
+      gallery: [
+        { src: "vitalyze-kiosk.webp", alt: "3D design render of the whole Vitalyze kiosk, front view", caption: "Kiosk (3D render)" },
+        { src: "vitalyze-kiosk-top.webp", alt: "3D render of the kiosk head with the Vitalyze logo, body-temperature sensor window, vents, and the ultrasonic height pod", caption: "Head and height pod (3D render)" },
+        { src: "vitalyze-kiosk-rfid.webp", alt: "3D render of the red Tap Your ID RFID sticker on the marble-white kiosk front, with the screen shelf and an arm bracket beside it", caption: "RFID tap area (3D render)" },
+        { src: "vitalyze-form.png", alt: "Vitalyze-Form admin dashboard with assessment filters, AI-generated health insights, and status breakdown", caption: "Admin dashboard (working web app)" }
+      ],
+      link: { url: "vitalyze/", label: "View full case study" },
       tags: ["React", "NestJS", "TypeORM/MySQL", "ESP32", "OCR"]
     },
     pnpitms: {
@@ -951,6 +1232,7 @@
       alt: "PNP ITMS Department landing page with a chooser listing BMI System, Intrusion Detection, Environment Monitoring, Hardware Inventory, and PC Information System",
       description: "Multi-domain platform for the Philippine National Police ITMS Department, built on the same ESP32 + NestJS/React foundation as Vitalyze-Form. A single landing page routes into five independent systems, each behind its own login and its own data pipeline.",
       points: [
+        "My role — I led a team of 3. My teammates mostly wrote the papers and documentation; I handled the technical side: the backend, the dashboards, the firmware, and the board wiring for all five systems.",
         "BMI System — an RFID tap identifies personnel, then an admin starts the session and the ESP32 kiosk polls for that signal before prompting for height and weight, posting each reading live. The backend computes BMI and Ideal Body Weight and classifies against both WHO bands and an age-adjusted PNP “Acceptable BMI” table (upper bound widens from 24.9 at ≤29 years to 27.0 at 51+).",
         "Intrusion Detection — an ESP32 posts triggered/clear events from a beam-break sensor. The backend keeps a live status and writes a log entry only on genuine state changes, while the dashboard polls status every second and history every 5 seconds.",
         "Environment Monitoring — an ESP32 posts temperature and smoke readings every 3 seconds. Fixed thresholds (smoke ≥ 1800, temperature ≥ 50°C) classify each reading as normal, smoke detected, or high temperature, logging only on state transitions.",
@@ -964,23 +1246,26 @@
         { src: "pnp-gallery-inventory.png", alt: "Hardware Inventory dashboard with device breakdown and alerts", caption: "Hardware Inventory" },
         { src: "pnp-gallery-pcinfo.png", alt: "PC Information System risk distribution and component health", caption: "PC Information System" }
       ],
+      link: { url: "pnp-itms/", label: "View full case study" },
       tags: ["React", "NestJS", "TypeORM/MySQL", "ESP32", "QR Codes"]
     },
     pupdonx: {
       title: "PUP–Donx Campus WAN",
-      image: "pup-donx-wan.png",
-      alt: "PUP campuses on Donx case study header with the design sheet and headline figures",
+      image: "pup-donx-wan-map.png",
+      alt: "Map of Luzon and Mindoro showing every PUP campus wired to its Donx POP, with Metro Manila and the Sta. Mesa main campus as insets and a highlighted traffic flow",
       description: "Network architecture case study: an enterprise WAN connecting all 26 campuses of the Polytechnic University of the Philippines, from Sta. Mesa to Sablayan, through Donx Networks, a fictional regional ISP. Every device is fully configured and buildable in Cisco Packet Tracer 8.2+.",
       points: [
+        "My role — [Add: solo or team project; what you designed, configured, and presented.]",
+        "Problem — connect 26 campuses across Luzon and Mindoro into one WAN that keeps working when a link or edge router fails and keeps student records off the Internet. [Reword the brief if it differs.]",
         "Routing — PUP (AS 64510) and Donx (AS 64500) each run their own OSPF process and meet only at eBGP. Two PUP edges peer at separate POPs and announce a split /25 under a covering /24, so return traffic lands on the edge holding the PAT translation and either edge covers for the other on failure.",
         "Overlay — 50 GRE over IPsec tunnels from every branch to two hubs at Sta. Mesa, with OSPF costs (1000 primary / 2000 backup) keeping traffic symmetric. PUP's private routes exist only inside the encrypted overlay.",
         "Addressing — 10.<site>.<role>.0/24: the second octet is the campus and the third is the user role, the same everywhere, so a single wildcard ACL line enforces a role policy across all 26 campuses.",
         "Security — nine layers from the Internet inward: BCP 38 ingress filtering, edge ACLs, an ASA-firewalled DMZ, role-based ACLs, and Layer 2 guards, with the Student Information System kept off the Internet for Data Privacy Act compliance.",
-        "Build — 138 devices, 154 cables, 72 configurations (15,205 lines), an interactive map of every campus with traffic-flow and failover playback, a cabling matrix, and control-plane plus end-to-end verification tests."
+        "Outcome — 138 devices, 154 cables, 72 configurations (15,205 lines), an interactive map of every campus with traffic-flow and failover playback, a cabling matrix, and control-plane plus end-to-end verification tests."
       ],
       gallery: [
-        { src: "pup-donx-wan.png", alt: "Case study header with the design sheet and headline figures", caption: "Design summary" },
-        { src: "pup-donx-wan-map.png", alt: "Map of Luzon and Mindoro showing every PUP campus wired to its Donx POP, with Metro Manila and the Sta. Mesa main campus as insets and a highlighted traffic flow", caption: "Topology map" }
+        { src: "pup-donx-wan-map.png", alt: "Map of Luzon and Mindoro showing every PUP campus wired to its Donx POP, with Metro Manila and the Sta. Mesa main campus as insets and a highlighted traffic flow", caption: "Topology map" },
+        { src: "pup-donx-wan.png", alt: "Case study header with the design sheet and headline figures", caption: "Design summary" }
       ],
       link: { url: "pup-donx-wan/", label: "View full case study" },
       tags: ["BGP", "OSPF", "GRE/IPsec", "Cisco ASA", "Packet Tracer"]
@@ -1318,4 +1603,3 @@
   });
 })();
 </script>
-
